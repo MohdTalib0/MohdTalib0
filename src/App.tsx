@@ -27,6 +27,7 @@ function LinkedinIcon({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
+
 import { personal, experience, projects, skills, stats } from "./data";
 
 /* ──────────────────── Helpers ──────────────────── */
@@ -53,12 +54,12 @@ function Section({ id, children, className = "" }: { id: string; children: React
 
 function SectionLabel({ icon: Icon, label }: { icon: React.ElementType; label: string }) {
   return (
-    <div className="flex items-center gap-2 mb-8">
-      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-dim border border-accent/20 text-accent text-xs font-medium tracking-wide uppercase">
-        <Icon size={14} />
+    <div className="flex items-center gap-3 mb-10">
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-dim border border-accent/20 text-accent text-xs font-semibold tracking-widest uppercase">
+        <Icon size={13} />
         {label}
       </div>
-      <div className="flex-1 h-px bg-border" />
+      <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
     </div>
   );
 }
@@ -67,12 +68,28 @@ function SectionLabel({ icon: Icon, label }: { icon: React.ElementType; label: s
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const links = ["experience", "projects", "skills", "contact"];
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id); });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    links.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handler);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -81,19 +98,23 @@ function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-bg/80 backdrop-blur-xl border-b border-border" : ""
+        scrolled ? "bg-bg/85 backdrop-blur-xl shadow-[0_1px_0_0_rgba(255,255,255,0.06)]" : ""
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" className="text-text-bright font-semibold text-lg tracking-tight">
-          <span className="text-accent">{">"}</span> MT
+          <span className="text-accent font-mono">{">"}</span> MT
         </a>
         <div className="hidden md:flex items-center gap-1">
           {links.map((link) => (
             <a
               key={link}
               href={`#${link}`}
-              className="px-3 py-1.5 text-sm text-text hover:text-text-bright transition-colors rounded-lg hover:bg-bg-card"
+              className={`px-3 py-1.5 text-sm transition-colors rounded-lg hover:bg-bg-card ${
+                activeSection === link
+                  ? "text-text-bright bg-bg-card"
+                  : "text-text hover:text-text-bright"
+              }`}
             >
               {link.charAt(0).toUpperCase() + link.slice(1)}
             </a>
@@ -205,7 +226,7 @@ function Hero() {
           </div>
         </motion.div>
 
-        {/* Name - left aligned, massive */}
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -225,8 +246,10 @@ function Hero() {
           className="text-lg md:text-xl text-text max-w-2xl mb-4 leading-relaxed"
         >
           <span className="text-text-bright font-semibold">{personal.name}</span>
-          <span className="text-text-dim"> / </span>
-          {personal.title} at{" "}
+          <span className="text-text-dim"> — </span>
+          {personal.title}
+          <br />
+          <span className="text-xs text-text-dim uppercase tracking-wider font-mono">Currently at</span>{" "}
           <span className="gradient-text font-semibold">TheAgentic AI</span>
         </motion.p>
 
@@ -235,7 +258,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-bg-card border border-border font-mono text-sm mb-10"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-bg-card border border-border font-mono text-sm mb-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
         >
           <span className="text-green">~</span>
           <span className="text-accent">$</span>
@@ -243,20 +266,22 @@ function Hero() {
           <span className="cursor-blink text-accent">|</span>
         </motion.div>
 
-        {/* Stats row - horizontal, not grid */}
+        {/* Stats row - with vertical separators */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="flex flex-wrap gap-6 md:gap-10 mb-12"
+          className="flex flex-wrap items-center gap-0 mb-12"
         >
           {stats.map((stat, i) => (
-            <div key={stat.label} className="group">
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl md:text-4xl font-extrabold text-text-bright tracking-tight">{stat.value}</span>
-                {i < stats.length - 1 && <span className="hidden md:block text-border text-2xl ml-6">/</span>}
+            <div key={stat.label} className="flex items-center">
+              <div className="group px-5 first:pl-0">
+                <div className="text-3xl md:text-4xl font-extrabold text-text-bright tracking-tight">{stat.value}</div>
+                <div className="text-xs text-text-dim mt-1 uppercase tracking-wider">{stat.label}</div>
               </div>
-              <div className="text-xs text-text-dim mt-1 uppercase tracking-wider">{stat.label}</div>
+              {i < stats.length - 1 && (
+                <div className="hidden md:block h-10 w-px bg-border mx-1" />
+              )}
             </div>
           ))}
         </motion.div>
@@ -270,7 +295,7 @@ function Hero() {
         >
           <a
             href={`mailto:${personal.email}`}
-            className="group flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-xl font-medium hover:bg-accent/90 transition-all hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+            className="group btn-glow flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-xl font-medium hover:bg-accent/90 transition-all"
           >
             <Mail size={18} />
             Let's talk
@@ -334,8 +359,8 @@ function ExperienceSection() {
         <SectionLabel icon={Briefcase} label="Experience" />
 
         <div className="relative">
-          {/* Timeline spine */}
-          <div className="absolute left-[18px] top-4 bottom-4 w-px bg-border hidden md:block" />
+          {/* Timeline spine - gradient */}
+          <div className="timeline-spine absolute left-[18px] top-4 bottom-4 w-px hidden md:block" />
 
           <div className="space-y-3">
             {experience.map((exp, i) => (
@@ -353,7 +378,11 @@ function ExperienceSection() {
                 }`} />
 
                 <div
-                  className="card-glow rounded-xl bg-bg-card border border-border overflow-hidden cursor-pointer transition-colors hover:bg-bg-card-hover"
+                  className={`card-glow rounded-xl bg-bg-card border overflow-hidden cursor-pointer transition-all hover:bg-bg-card-hover ${
+                    exp.current
+                      ? "border-accent/20 shadow-[0_0_0_1px_rgba(59,130,246,0.1),0_4px_32px_rgba(59,130,246,0.06)]"
+                      : "border-border"
+                  }`}
                   onClick={() => setExpanded(expanded === i ? null : i)}
                 >
                   {/* Header */}
@@ -362,7 +391,7 @@ function ExperienceSection() {
                       <div className="flex flex-wrap items-center gap-2 mb-1">
                         <h3 className="text-text-bright font-semibold text-sm">{exp.role}</h3>
                         {exp.badge && (
-                          <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-accent-dim text-accent border border-accent/20">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-gradient-to-r from-accent/20 to-purple-500/20 text-accent border border-accent/20">
                             {exp.badge}
                           </span>
                         )}
@@ -383,7 +412,9 @@ function ExperienceSection() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-xs text-text-dim font-mono">{exp.period}</span>
+                      <span className="text-[11px] text-text-dim font-mono px-2 py-0.5 rounded bg-bg border border-border">
+                        {exp.period}
+                      </span>
                       <ChevronRight
                         size={16}
                         className={`text-text-dim transition-transform duration-200 ${expanded === i ? "rotate-90" : ""}`}
@@ -437,7 +468,7 @@ function ExperienceSection() {
 
 function HighlightBand() {
   return (
-    <div className="relative py-20 px-6 overflow-hidden">
+    <div className="relative py-24 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-purple-500/5 to-accent/5" />
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] rounded-full bg-accent/8 blur-[80px] pointer-events-none" />
 
@@ -446,29 +477,39 @@ function HighlightBand() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-accent font-mono text-xs mb-4 tracking-wider uppercase"
+          className="text-accent font-mono text-xs mb-10 tracking-wider uppercase"
         >
           Track record
         </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-2xl md:text-4xl font-extrabold text-text-bright tracking-tight mb-6"
-        >
-          3 platforms shipped in 2 weeks each.
-          <br />
-          <span className="text-text">50% inference cost cut. 10x onboarding speed.</span>
-        </motion.h2>
+        <div className="grid md:grid-cols-3 gap-8 md:gap-4 mb-10">
+          {[
+            { value: "3", suffix: " platforms", label: "shipped in 2 weeks each, 0-to-1 with full client sign-off" },
+            { value: "50%", suffix: "", label: "inference cost reduction on Dumroo 2.0 RAG pipeline" },
+            { value: "10×", suffix: "", label: "onboarding speed improvement through AI automation" },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              className="text-center px-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <div className="text-4xl md:text-5xl font-extrabold mb-3">
+                <span className="gradient-text">{item.value}</span>
+                <span className="text-text-bright">{item.suffix}</span>
+              </div>
+              <p className="text-sm text-text-dim leading-relaxed max-w-xs mx-auto">{item.label}</p>
+            </motion.div>
+          ))}
+        </div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-text-dim max-w-xl mx-auto leading-relaxed"
+          transition={{ delay: 0.4 }}
+          className="text-text-dim text-sm max-w-xl mx-auto leading-relaxed"
         >
-          From health-tech AI pipelines to regulatory compliance platforms,
           I don't just build features. I ship entire products, end-to-end, fast.
         </motion.p>
       </div>
@@ -477,6 +518,8 @@ function HighlightBand() {
 }
 
 /* ──────────────────── Projects ──────────────────── */
+
+const dotColors = ["bg-accent", "bg-purple-400", "bg-green-400", "bg-orange-400", "bg-cyan-400", "bg-amber-400", "bg-rose-400", "bg-indigo-400"];
 
 function ProjectsSection() {
   const featured = projects.filter((p) => p.featured);
@@ -496,13 +539,18 @@ function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className={`card-glow group p-6 rounded-xl bg-bg-card border border-border hover:bg-bg-card-hover transition-colors project-accent-${(i % 3) + 1}`}
+              className={`card-glow group relative p-6 rounded-xl bg-bg-card border border-border hover:bg-bg-card-hover transition-all hover:-translate-y-0.5 hover:shadow-xl project-accent-${(i % 3) + 1}`}
             >
               <div className="flex items-start justify-between mb-2">
                 <div>
-                  <h3 className="text-text-bright font-semibold text-lg">{project.name}</h3>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <h3 className="text-text-bright font-semibold text-lg">{project.name}</h3>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono text-text-dim border border-border bg-bg">
+                      featured
+                    </span>
+                  </div>
                   {project.tagline && (
-                    <p className="text-accent text-sm font-medium mt-0.5">{project.tagline}</p>
+                    <p className="text-accent text-sm font-medium">{project.tagline}</p>
                   )}
                 </div>
                 <div className="flex gap-2 shrink-0">
@@ -563,8 +611,11 @@ function ProjectsSection() {
               className="group p-4 rounded-xl bg-bg-card border border-border hover:bg-bg-card-hover hover:border-border-hover transition-all"
             >
               <div className="flex items-center justify-between mb-1">
-                <h4 className="text-text-bright font-medium text-sm">{project.name}</h4>
-                <div className="flex gap-1.5">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotColors[i % dotColors.length]}`} />
+                  <h4 className="text-text-bright font-medium text-sm truncate">{project.name}</h4>
+                </div>
+                <div className="flex gap-1.5 shrink-0 ml-2">
                   {project.live && (
                     <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent transition-colors">
                       <ExternalLink size={13} />
@@ -594,14 +645,16 @@ function ProjectsSection() {
 /* ──────────────────── Skills ──────────────────── */
 
 function SkillsSection() {
-  const categoryColors: Record<string, string> = {
-    "AI & LLM": "text-purple-400 bg-purple-400/10 border-purple-400/20",
-    "Backend": "text-blue-400 bg-blue-400/10 border-blue-400/20",
-    "Frontend & Mobile": "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",
-    "ML & Data": "text-orange-400 bg-orange-400/10 border-orange-400/20",
-    "Infrastructure": "text-green-400 bg-green-400/10 border-green-400/20",
-    "Databases & BaaS": "text-amber-400 bg-amber-400/10 border-amber-400/20",
+  const categoryStyles: Record<string, { badge: string; border: string; glowBorder: string; glowShadow: string; skillText: string }> = {
+    "AI & LLM":          { badge: "text-purple-400 bg-purple-400/10 border-purple-400/20", border: "#a855f7", glowBorder: "rgba(168,85,247,0.3)",  glowShadow: "rgba(168,85,247,0.08)",  skillText: "text-purple-300" },
+    "Backend":           { badge: "text-blue-400 bg-blue-400/10 border-blue-400/20",       border: "#60a5fa", glowBorder: "rgba(96,165,250,0.3)",   glowShadow: "rgba(96,165,250,0.08)",  skillText: "text-blue-300"   },
+    "Frontend & Mobile": { badge: "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",       border: "#22d3ee", glowBorder: "rgba(34,211,238,0.3)",   glowShadow: "rgba(34,211,238,0.08)",  skillText: "text-cyan-300"   },
+    "ML & Data":         { badge: "text-orange-400 bg-orange-400/10 border-orange-400/20", border: "#fb923c", glowBorder: "rgba(251,146,60,0.3)",   glowShadow: "rgba(251,146,60,0.08)",  skillText: "text-orange-300" },
+    "Infrastructure":    { badge: "text-green-400 bg-green-400/10 border-green-400/20",    border: "#4ade80", glowBorder: "rgba(74,222,128,0.3)",   glowShadow: "rgba(74,222,128,0.08)",  skillText: "text-green-300"  },
+    "Databases & BaaS":  { badge: "text-amber-400 bg-amber-400/10 border-amber-400/20",    border: "#fbbf24", glowBorder: "rgba(251,191,36,0.3)",   glowShadow: "rgba(251,191,36,0.08)",  skillText: "text-amber-300"  },
   };
+
+  const fallback = { badge: "text-accent bg-accent-dim border-accent/20", border: "#3b82f6", glowBorder: "rgba(59,130,246,0.3)", glowShadow: "rgba(59,130,246,0.08)", skillText: "text-accent" };
 
   return (
     <Section id="skills" className="py-24 px-6">
@@ -610,67 +663,77 @@ function SkillsSection() {
 
         {/* Primary skills - large, visual */}
         <div className="grid md:grid-cols-3 gap-4 mb-4">
-          {Object.entries(skills).slice(0, 3).map(([category, items], i) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="p-5 rounded-xl bg-bg-card border border-border group hover:bg-bg-card-hover transition-colors"
-            >
-              <div className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-lg text-xs font-medium border mb-3 ${categoryColors[category] || "text-accent bg-accent-dim border-accent/20"}`}>
-                <Terminal size={12} />
-                {category}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {items.map((skill, j) => (
-                  <span
-                    key={skill}
-                    className={`px-2.5 py-1 rounded-lg text-xs cursor-default transition-all duration-200 ${
-                      j < 3
-                        ? "text-text-bright bg-bg border border-border font-medium hover:border-accent/40"
-                        : "text-text-dim bg-bg/50 border border-border/50 hover:border-border"
-                    }`}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+          {Object.entries(skills).slice(0, 3).map(([category, items], i) => {
+            const style = categoryStyles[category] ?? fallback;
+            return (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                style={{ borderLeft: `2px solid ${style.border}`, "--glow-border": style.glowBorder, "--glow-shadow": style.glowShadow } as React.CSSProperties}
+                className="skill-card p-5 rounded-xl bg-bg-card border border-border group hover:bg-bg-card-hover transition-colors"
+              >
+                <div className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-lg text-xs font-medium border mb-3 ${style.badge}`}>
+                  <Terminal size={12} />
+                  {category}
+                  <span className="opacity-50 font-mono">({items.length})</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {items.map((skill, j) => (
+                    <span
+                      key={skill}
+                      className={`px-2.5 py-1 rounded-lg text-xs cursor-default transition-all duration-200 ${
+                        j < 3
+                          ? `${style.skillText} bg-bg border border-border font-medium`
+                          : "text-text-dim bg-bg/50 border border-border/50 hover:border-border"
+                      }`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Secondary skills - compact */}
         <div className="grid md:grid-cols-3 gap-4">
-          {Object.entries(skills).slice(3).map(([category, items], i) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 + 0.3 }}
-              className="p-4 rounded-xl bg-bg-card border border-border"
-            >
-              <div className={`inline-flex items-center gap-2 px-2 py-0.5 rounded text-[10px] font-medium border mb-2.5 ${categoryColors[category] || "text-accent bg-accent-dim border-accent/20"}`}>
-                {category}
-              </div>
-              <div className="flex flex-wrap gap-1">
-                {items.map((skill, j) => (
-                  <span
-                    key={skill}
-                    className={`px-2 py-0.5 rounded text-[11px] cursor-default transition-colors ${
-                      j < 3
-                        ? "text-text bg-bg border border-border"
-                        : "text-text-dim"
-                    }`}
-                  >
-                    {skill}{j < items.length - 1 && j >= 3 ? " /" : ""}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+          {Object.entries(skills).slice(3).map(([category, items], i) => {
+            const style = categoryStyles[category] ?? fallback;
+            return (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 + 0.3 }}
+                style={{ borderLeft: `2px solid ${style.border}`, "--glow-border": style.glowBorder, "--glow-shadow": style.glowShadow } as React.CSSProperties}
+                className="skill-card p-4 rounded-xl bg-bg-card border border-border"
+              >
+                <div className={`inline-flex items-center gap-2 px-2 py-0.5 rounded text-[10px] font-medium border mb-2.5 ${style.badge}`}>
+                  {category}
+                  <span className="opacity-50 font-mono">({items.length})</span>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {items.map((skill, j) => (
+                    <span
+                      key={skill}
+                      className={`px-2 py-0.5 rounded text-[11px] cursor-default transition-colors ${
+                        j < 3
+                          ? `${style.skillText} bg-bg border border-border`
+                          : "text-text-dim"
+                      }`}
+                    >
+                      {skill}{j < items.length - 1 && j >= 3 ? " /" : ""}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </Section>
@@ -683,9 +746,11 @@ function ContactSection() {
   return (
     <Section id="contact" className="py-24 px-6">
       <div className="max-w-3xl mx-auto">
-        <div className="relative p-10 md:p-16 rounded-2xl bg-bg-card border border-border overflow-hidden text-center">
-          {/* Background glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[100px] pointer-events-none" />
+        <div className="relative p-10 md:p-16 rounded-2xl bg-bg-card border border-border overflow-hidden text-center contact-card-glow">
+          {/* Multi-color background glows */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-accent/8 blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] rounded-full bg-purple-500/6 blur-[80px] pointer-events-none" />
+          <div className="absolute top-1/2 right-0 w-[200px] h-[200px] rounded-full bg-green/5 blur-[60px] pointer-events-none" />
 
           <div className="relative z-10">
             <motion.p
@@ -706,16 +771,18 @@ function ContactSection() {
               Whether it's a production AI platform, an ambitious startup idea, or a role where I can lead and ship fast.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-3 mb-6">
+            <div className="flex flex-wrap justify-center gap-3 mb-4">
               <a
                 href={`mailto:${personal.email}`}
-                className="group flex items-center gap-2 px-7 py-3.5 bg-accent text-white rounded-xl font-semibold hover:bg-accent/90 transition-all hover:shadow-[0_0_40px_rgba(59,130,246,0.3)]"
+                className="group btn-glow flex items-center gap-2 px-7 py-3.5 bg-accent text-white rounded-xl font-semibold hover:bg-accent/90 transition-all"
               >
                 <Mail size={18} />
                 {personal.email}
                 <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </div>
+
+            <p className="text-xs text-text-dim mb-6 font-mono">{personal.phone} · {personal.location}</p>
 
             <div className="flex justify-center gap-3">
               {[
@@ -754,6 +821,9 @@ function Footer() {
             </div>
             <p className="text-xs text-text-dim">
               Senior Full Stack AI Engineer. Building things that think.
+            </p>
+            <p className="text-[10px] text-text-dim/40 font-mono mt-1">
+              React · TypeScript · Tailwind · Framer Motion
             </p>
           </div>
           <div className="flex items-center gap-4">
