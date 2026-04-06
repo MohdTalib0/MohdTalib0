@@ -174,3 +174,40 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Glow pulse for primary CTA button */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.25); }
+  50% { box-shadow: 0 0 45px rgba(59, 130, 246, 0.55); }
+}
+
+.btn-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Timeline gradient spine */
+.timeline-spine {
+  background: linear-gradient(to bottom, rgba(59,130,246,0.6), rgba(30,30,34,0.3));
+}
+
+/* Contact card multi-glow shadow */
+.contact-card-glow {
+  box-shadow:
+    0 0 0 1px rgba(59,130,246,0.12),
+    0 0 80px rgba(59,130,246,0.06),
+    0 0 160px rgba(139,92,246,0.04);
+}
+
+/* Skill card with category-colored hover glow via CSS vars */
+.skill-card {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.skill-card:hover {
+  box-shadow: 0 0 0 1px var(--glow-border, rgba(59,130,246,0.3)),
+              0 4px 24px var(--glow-shadow, rgba(59,130,246,0.08));
+}
+
+/* Stronger card-glow shimmer */
+.card-glow::before {
+  background: linear-gradient(135deg, transparent 30%, rgba(59,130,246,0.25) 50%, transparent 70%);
+}
