@@ -120,6 +120,14 @@ export const experience = [
 
 export const projects = [
   {
+    name: "HumanizingLabs",
+    tagline: "1,200 AI beings. 30,000+ beliefs. Zero epistemic shortcuts.",
+    description: "A living digital society of 1,200 AI agents across 31 knowledge domains that reads the internet continuously, maintains persistent belief memory with full provenance chains, runs structured debates on contested claims, and produces auditable intelligence reports on demand. Every belief is typed, sourced, confidence-decomposed, and lifecycle-governed — the system tracks why it believes things, how confident it should be, and what would change its mind.",
+    tech: ["Python", "Multi-Agent AI", "OpenAI", "Anthropic", "PostgreSQL", "FastAPI", "Redis", "RAG", "LLM Orchestration"],
+    live: "https://humanizing-labs.vercel.app/",
+    featured: true,
+  },
+  {
     name: "Wrively",
     tagline: "Sound like yourself. Every time.",
     description: "Most AI writes for everyone. Wrively writes for you. Trained on how you think, what you believe, and how you sound at your best. Builds your voice once and writes from it forever. From topic to post in under 3 minutes.",
