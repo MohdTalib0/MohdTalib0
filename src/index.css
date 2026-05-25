@@ -6,8 +6,8 @@
  *
  * Surfaces:  warm parchment (#FBF8F1) with white cards
  * Type:      near-black ink (#1A1815) for headings, warm gray for body
- * Accent:    terracotta amber (#B8662D) — single decisive accent
- * Support:   deep brown (was violet), sage (was green) — used sparingly
+ * Accent:    terracotta amber (#B8662D), single decisive accent
+ * Support:   deep brown (was violet), sage (was green), used sparingly
  *
  * The brief: a serious essay / audit-firm aesthetic, not a hackathon
  * dashboard. Whitespace, typography, restraint do the work.
@@ -83,7 +83,7 @@
   }
 }
 
-/* Paper grain — slightly more visible on cream than on black */
+/* Paper grain: slightly more visible on cream than on black */
 .noise-overlay {
   position: fixed;
   inset: 0;
@@ -96,7 +96,7 @@
   background-size: 256px 256px;
 }
 
-/* Inverted grid — dark hairlines on cream, barely there */
+/* Inverted grid: dark hairlines on cream, barely there */
 .grid-bg {
   background-image:
     linear-gradient(rgba(26, 24, 21, 0.025) 1px, transparent 1px),
@@ -105,7 +105,7 @@
 }
 
 /*
- * Ambient glow — very low opacity on cream so we don't fog the page.
+ * Ambient glow: very low opacity on cream so we don't fog the page.
  * The blur reads like sunlight through paper rather than a dark-mode
  * orb. If it feels too much, drop opacity to 0.04.
  */
@@ -117,7 +117,7 @@
   opacity: 0.08;
 }
 
-/* Editorial gradient text — terracotta to deep brown */
+/* Editorial gradient text: terracotta to deep brown */
 .gradient-text {
   background: linear-gradient(135deg, #b8662d 0%, #7a4f2c 100%);
   -webkit-background-clip: text;
@@ -175,7 +175,7 @@
   opacity: 1;
 }
 
-/* Featured project accent borders — single warm family */
+/* Featured project accent borders: single warm family */
 .project-accent-1 {
   border-left: 2px solid #b8662d;
 }
@@ -191,7 +191,7 @@
   font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* Timeline gradient spine — amber fade into beige */
+/* Timeline gradient spine: amber fade into beige */
 .timeline-spine {
   background: linear-gradient(
     to bottom,
@@ -201,7 +201,7 @@
 }
 
 /*
- * Contact card glow — single editorial warm wash.
+ * Contact card glow: single editorial warm wash.
  * Looks like a spotlight on parchment.
  */
 .contact-card-glow {

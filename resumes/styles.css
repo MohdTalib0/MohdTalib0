@@ -1,0 +1,605 @@
+/*
+ * ─────────────────────────────────────────────────────────────────
+ * Resume + CV — shared print stylesheet.
+ *
+ * Both documents share this file. They differentiate via a top-level
+ * class on <body>:  .doc-onepage  vs  .doc-cv
+ *
+ * Design constraints:
+ *   1. ATS-readable: semantic HTML, single column flow, real text only.
+ *   2. Print-first: @page rules, no screen-only flourishes that disappear.
+ *   3. Brand-aligned: matches portfolio (Inter + terracotta #B8662D).
+ *   4. Pure black body text for parser contrast scoring.
+ *
+ * Output workflow: open in Chrome → ⌘P / Ctrl+P → Save as PDF.
+ * Or one-shot via `npm run build:resumes` (Puppeteer).
+ * ─────────────────────────────────────────────────────────────────
+ */
+
+/* ─── Tokens ────────────────────────────────────────────────────── */
+:root {
+  --ink: #0f0e0c;        /* body text — almost-black, warm */
+  --mute: #4a463f;       /* secondary text (company, dates) */
+  --subtle: #7a766b;     /* tertiary text (separators, captions) */
+  --accent: #b8662d;     /* terracotta — name + section dividers ONLY */
+  --rule: #d9d3c2;       /* hairline rules */
+  --paper: #ffffff;      /* paper white, max ATS contrast */
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ─── Page setup ────────────────────────────────────────────────── */
+@page {
+  size: A4 portrait;
+  margin: 8mm 11mm;
+}
+.doc-onepage {
+  /* slightly tighter margins for the strict one-pager */
+  --page-margin-x: 10mm;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11", "kern";
+  line-height: 1.35;
+}
+
+/* In-browser preview only — print discards this and uses @page */
+body {
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 14mm;
+  box-shadow: 0 0 0 1px #eee, 0 24px 80px rgba(0, 0, 0, 0.08);
+}
+@media print {
+  body {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+/* Tabular numerals — numbers should scan digit-by-digit */
+.tnum,
+time,
+.dates {
+  font-feature-settings: "tnum", "lnum", "ss01";
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ─── Sizing variants ───────────────────────────────────────────── */
+.doc-onepage {
+  font-size: 8.8pt;
+  line-height: 1.27;
+}
+.doc-cv {
+  font-size: 9.3pt;
+  line-height: 1.35;
+}
+
+/* ─── Header ────────────────────────────────────────────────────── */
+.header {
+  text-align: left;
+  margin-bottom: 7pt;
+  padding-bottom: 6pt;
+  border-bottom: 1.2pt solid var(--accent);
+}
+
+.header h1 {
+  font-size: 20pt;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 3pt;
+}
+
+.header .title {
+  font-size: 10pt;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin-bottom: 5pt;
+}
+
+/* Header tagline (one-pager only) — three biggest signals above the fold */
+.header .tagline {
+  font-size: 8.5pt;
+  color: var(--mute);
+  line-height: 1.4;
+  margin-bottom: 5pt;
+}
+.header .tagline strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.header .tagline .sep {
+  color: var(--subtle);
+  margin: 0 4pt;
+}
+
+/* Stat chips — scannable signal row for the one-pager header */
+.header .stat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4pt 5pt;
+  margin: 2pt 0 5pt;
+}
+.header .chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4pt;
+  font-size: 7.8pt;
+  font-weight: 500;
+  color: var(--mute);
+  padding: 1.5pt 6pt 1.8pt;
+  border: 0.5pt solid var(--rule);
+  border-radius: 10pt;
+  letter-spacing: 0.005em;
+  white-space: nowrap;
+  line-height: 1.25;
+}
+.header .chip .chip-num {
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.header .contacts {
+  font-size: 8.5pt;
+  color: var(--mute);
+  line-height: 1.45;
+}
+.header .contacts a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 0.5pt solid var(--rule);
+}
+.header .contacts a:hover {
+  border-bottom-color: var(--accent);
+}
+.header .contacts .sep {
+  color: var(--subtle);
+  margin: 0 5pt;
+  user-select: none;
+}
+
+.header .availability {
+  font-size: 8pt;
+  color: var(--mute);
+  margin-top: 3pt;
+  letter-spacing: 0.005em;
+}
+.header .availability strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ─── Summary (CV only) ─────────────────────────────────────────── */
+.summary {
+  font-size: 9.2pt;
+  color: var(--ink);
+  line-height: 1.45;
+  margin-bottom: 6pt;
+  padding-bottom: 6pt;
+  border-bottom: 0.5pt solid var(--rule);
+}
+.summary strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ─── Section headings ──────────────────────────────────────────── */
+/*
+ * IMPORTANT: do NOT set `break-inside: avoid` on .section.
+ * If a section can't fit on the current page it would get pushed entirely
+ * to the next page, leaving a huge dead zone. Page breaks belong on
+ * individual .entry / .project items, not the whole section.
+ */
+.section {
+  margin-top: 8pt;
+}
+.doc-onepage .section {
+  margin-top: 6pt;
+}
+
+.section > h2 {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4pt;
+  padding-bottom: 2pt;
+  border-bottom: 0.5pt solid var(--rule);
+}
+
+/* ─── Experience entries ────────────────────────────────────────── */
+.entry {
+  margin-bottom: 6pt;
+  break-inside: avoid;
+}
+.doc-onepage .entry {
+  margin-bottom: 4pt;
+}
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10pt;
+  margin-bottom: 0;
+}
+
+.entry .role {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.doc-onepage .entry .role {
+  font-size: 9.5pt;
+}
+
+.entry .dates {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  color: var(--mute);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.entry .meta {
+  font-size: 8.5pt;
+  color: var(--mute);
+  margin-bottom: 2pt;
+  line-height: 1.35;
+}
+.entry .meta .company {
+  color: var(--ink);
+  font-weight: 600;
+}
+.entry .meta .sep {
+  color: var(--subtle);
+  margin: 0 4pt;
+}
+
+.entry .lede {
+  font-size: 9pt;
+  color: var(--ink);
+  margin-bottom: 2pt;
+  line-height: 1.4;
+}
+.entry .lede strong {
+  font-weight: 600;
+}
+
+.entry ul {
+  list-style: none;
+  padding-left: 8pt;
+  margin-top: 1pt;
+}
+.entry ul li {
+  position: relative;
+  font-size: 9pt;
+  line-height: 1.38;
+  color: var(--ink);
+  margin-bottom: 1.5pt;
+  padding-left: 7pt;
+}
+.doc-onepage .entry ul li {
+  font-size: 8.8pt;
+  line-height: 1.35;
+}
+.entry ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 2.5pt;
+  height: 2.5pt;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.entry ul li strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ─── Projects ──────────────────────────────────────────────────── */
+.project {
+  margin-bottom: 5pt;
+  break-inside: avoid;
+}
+.doc-onepage .project {
+  margin-bottom: 3.5pt;
+}
+.project:last-child {
+  margin-bottom: 0;
+}
+
+.project .row {
+  display: flex;
+  align-items: baseline;
+  gap: 5pt;
+  margin-bottom: 0;
+  flex-wrap: wrap;
+}
+
+.project .name {
+  font-size: 9.5pt;
+  font-weight: 700;
+  color: var(--ink);
+}
+.doc-onepage .project .name {
+  font-size: 9.2pt;
+}
+
+.project .badges {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  color: var(--mute);
+  font-weight: 500;
+}
+.project .badges .pill {
+  display: inline-block;
+  padding: 0 4pt;
+  border: 0.5pt solid var(--rule);
+  border-radius: 2pt;
+  margin-right: 3pt;
+  color: var(--mute);
+}
+.project .badges .pill.oss {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.project .badges .link {
+  color: var(--mute);
+  text-decoration: none;
+  border-bottom: 0.5pt dotted var(--rule);
+  margin-right: 4pt;
+}
+
+.project .description {
+  font-size: 8.8pt;
+  color: var(--ink);
+  line-height: 1.38;
+  margin-top: 0;
+}
+.project .stack {
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  color: var(--subtle);
+  margin-top: 1pt;
+  letter-spacing: 0.005em;
+}
+
+/* ─── Skills ────────────────────────────────────────────────────── */
+.skills .row {
+  display: grid;
+  grid-template-columns: 115pt 1fr;
+  gap: 8pt;
+  font-size: 8.8pt;
+  line-height: 1.4;
+  margin-bottom: 3pt;
+}
+.skills .row:last-child {
+  margin-bottom: 0;
+}
+.skills .label {
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.skills .values {
+  color: var(--mute);
+}
+.skills .values strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ─── Education ─────────────────────────────────────────────────── */
+.education .entry .row {
+  margin-bottom: 1pt;
+}
+.education .meta {
+  font-size: 9pt;
+  color: var(--mute);
+}
+
+/* ─── Awards / footer rows ──────────────────────────────────────── */
+/* Legacy one-pager prose layout */
+.awards-row,
+.line {
+  font-size: 8.8pt;
+  color: var(--ink);
+  line-height: 1.45;
+  break-inside: avoid;
+}
+.awards-row .sep,
+.line .sep {
+  color: var(--subtle);
+  margin: 0 5pt;
+}
+.awards-row strong,
+.line strong {
+  font-weight: 600;
+}
+
+/* Structured CV awards list — year column + content column */
+.awards-list {
+  display: grid;
+  gap: 4pt;
+}
+.award {
+  display: grid;
+  grid-template-columns: 30pt 1fr;
+  gap: 9pt;
+  align-items: baseline;
+  font-size: 9pt;
+  line-height: 1.4;
+  break-inside: avoid;
+}
+.award-year {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  font-weight: 500;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
+}
+.award-body strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.award-context {
+  color: var(--mute);
+  margin-left: 4pt;
+}
+.award-context::before {
+  content: "·";
+  color: var(--subtle);
+  margin-right: 5pt;
+}
+
+/* ─── Certifications (CV only) — 2-column compact grid ─────────── */
+.certs .certs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16pt;
+  row-gap: 2pt;
+}
+.certs .item {
+  font-size: 8.8pt;
+  line-height: 1.35;
+  break-inside: avoid;
+}
+.certs .item strong {
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+}
+.certs .item .issuer {
+  color: var(--mute);
+  font-size: 8.3pt;
+}
+
+/* ─── Selected open source (CV only) ────────────────────────────── */
+.oss-item {
+  font-size: 9.3pt;
+  line-height: 1.45;
+  margin-bottom: 3pt;
+}
+.oss-item strong {
+  font-weight: 600;
+}
+
+/* ─── Earlier roles (compact line on 1-pager) ───────────────────── */
+.earlier {
+  font-size: 8.6pt;
+  color: var(--mute);
+  line-height: 1.4;
+  margin-top: 3pt;
+}
+.earlier strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ─── Two-column footer row (Education + Recognition) ───────────── */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 14pt;
+  margin-top: 6pt;
+  break-inside: avoid;
+}
+.bottom-row .section {
+  margin-top: 0;
+}
+
+.recognition-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.recognition-list li {
+  position: relative;
+  font-size: 8.6pt;
+  line-height: 1.4;
+  color: var(--ink);
+  padding-left: 7pt;
+  margin-bottom: 1pt;
+}
+.recognition-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 2.5pt;
+  height: 2.5pt;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.recognition-list li strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.recognition-list .rec-context {
+  color: var(--mute);
+  margin-left: 3pt;
+}
+.recognition-list .rec-context::before {
+  content: "·";
+  color: var(--subtle);
+  margin-right: 4pt;
+}
+
+/* ─── Print-only / Screen-only utilities ────────────────────────── */
+.no-print {
+  display: none;
+}
+@media screen {
+  .no-print {
+    display: block;
+    position: fixed;
+    top: 12pt;
+    right: 12pt;
+    background: var(--accent);
+    color: #fff;
+    padding: 6pt 10pt;
+    font-size: 9pt;
+    font-weight: 600;
+    border-radius: 4pt;
+    box-shadow: 0 4pt 12pt rgba(184, 102, 45, 0.3);
+    text-decoration: none;
+  }
+}
+
+/* Avoid orphaned section headings */
+h2 + .entry,
+h2 + .project,
+h2 + .skills,
+h2 + .awards-row {
+  break-before: avoid;
+}

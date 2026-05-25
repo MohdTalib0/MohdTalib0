@@ -110,7 +110,7 @@ export const experience = [
     type: "Innomatics, CodeClause, Sparks Foundation, Shiga Corp, Robust Results",
     location: "Remote",
     remote: true,
-    period: "Jul 2022 - Jun 2023",
+    period: "Jul 2021 - Jun 2023",
     current: false,
     bullets: [
       "Built CNN & YOLO models for plant disease detection, TensorFlow neural networks for forecasting systems, Flask web apps with embedded ML pipelines, and Java backend services.",
@@ -147,7 +147,7 @@ export const projects = [
   {
     name: "HumanizingLabs",
     tagline: "1,200 AI beings. 30,000+ beliefs. Zero epistemic shortcuts.",
-    description: "A living digital society of 1,200 AI agents across 31 knowledge domains that reads the internet continuously, maintains persistent belief memory with full provenance chains, runs structured debates on contested claims, and produces auditable intelligence reports on demand. Every belief is typed, sourced, confidence-decomposed, and lifecycle-governed — the system tracks why it believes things, how confident it should be, and what would change its mind.",
+    description: "A living digital society of 1,200 AI agents across 31 knowledge domains that reads the internet continuously, maintains persistent belief memory with full provenance chains, runs structured debates on contested claims, and produces auditable intelligence reports on demand. Every belief is typed, sourced, confidence-decomposed, and lifecycle-governed: the system tracks why it believes things, how confident it should be, and what would change its mind.",
     tech: ["Python", "Multi-Agent AI", "OpenAI", "Anthropic", "PostgreSQL", "FastAPI", "Redis", "RAG", "LLM Orchestration"],
     live: "https://humanizing-labs.vercel.app/",
     featured: true,
@@ -246,7 +246,7 @@ export const projects = [
 
 /**
  * The exact stack I'm shipping with right now. This is the line
- * a senior hiring manager scans first — it has to be precise and
+ * a senior hiring manager scans first; it has to be precise and
  * defensible in an interview.
  */
 export const currentStack = [
@@ -263,7 +263,7 @@ export const currentStack = [
 ];
 
 /**
- * Trimmed skill matrix — 4-6 items per category. Recruiter rule:
+ * Trimmed skill matrix: 4-6 items per category. Recruiter rule:
  * top 10 are signal, the rest dilute.
  */
 export const skills = {
@@ -316,7 +316,7 @@ export const skills = {
 };
 
 /**
- * Education — recruiters specifically check degree + school + year.
+ * Education: recruiters specifically check degree + school + year.
  * Surfacing this in the visible portfolio (not just the PDF resume)
  * removes a "presumed absent" red flag.
  */
@@ -345,7 +345,7 @@ export const stats = [
 ];
 
 /**
- * The hero proof strip — the 4 numbers that should make a recruiter
+ * The hero proof strip: the 4 numbers that should make a recruiter
  * decide to send an email within 10 seconds.
  * Numbers come first, then a single descriptive line.
  */
@@ -373,7 +373,7 @@ export const proofMetrics = [
 ];
 
 /**
- * Trust strip — quiet wordmarks shown below the hero so a recruiter
+ * Trust strip: quiet wordmarks shown below the hero so a recruiter
  * sees a sequence of credible places before scrolling.
  */
 export const collaborations = [

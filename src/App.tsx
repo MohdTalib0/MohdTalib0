@@ -144,7 +144,7 @@ function Navbar() {
   }, []);
 
   // Body scroll lock + Esc-to-close while the drawer is open.
-  // Restoring overflow on cleanup is important — a stuck "hidden"
+  // Restoring overflow on cleanup is important; a stuck "hidden"
   // state silently breaks the whole page after navigation.
   useEffect(() => {
     if (!mobileOpen) return;
@@ -178,7 +178,7 @@ function Navbar() {
           <a
             href="#"
             className="text-text-bright font-semibold text-lg tracking-tight"
-            aria-label="Home — Mohd Talib"
+            aria-label="Home · Mohd Talib"
           >
             <span className="text-accent font-mono">{">"}</span> MT
           </a>
@@ -434,7 +434,7 @@ function Hero() {
           Mohd Talib · Senior Full Stack AI Engineer &amp; Tech Lead
         </motion.p>
 
-        {/* Headline — value claim, not brand voice */}
+        {/* Headline: value claim, not brand voice */}
         <motion.h1
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
@@ -447,7 +447,7 @@ function Hero() {
           <span className="gradient-text">0 to 1, in weeks.</span>
         </motion.h1>
 
-        {/* Proof paragraph — concrete, defensible, scannable */}
+        {/* Proof paragraph: concrete, defensible, scannable */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -466,7 +466,7 @@ function Hero() {
           Agentic AI, RAG, full-stack on FastAPI &amp; Next.js.
         </motion.p>
 
-        {/* Recognition strip — education + awards, fills the credibility gap */}
+        {/* Recognition strip: education + awards, fills the credibility gap */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -490,7 +490,7 @@ function Hero() {
           ))}
         </motion.div>
 
-        {/* CTAs — one dominant primary, two ghost secondary. GitHub moved to nav. */}
+        {/* CTAs: one dominant primary, two ghost secondary. GitHub moved to nav. */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -530,7 +530,7 @@ function Hero() {
           </a>
         </motion.div>
 
-        {/* Booking tertiary — recruiters who don't want to email can self-serve */}
+        {/* Booking tertiary: recruiters who don't want to email can self-serve */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -598,7 +598,7 @@ function MetricsStrip() {
 
 /* ──────────────────── Trust Strip ──────────────────── */
 /**
- * Quiet wordmark row — what an editorial / audit-firm site does instead
+ * Quiet wordmark row: what an editorial / audit-firm site does instead
  * of a marquee. No animation, no logos that might break trademark norms.
  */
 
@@ -801,7 +801,7 @@ function ProjectsSection() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${project.name} on GitHub — ${project.stars} stars`}
+                        aria-label={`${project.name} on GitHub · ${project.stars} stars`}
                         className="inline-flex items-center gap-2 px-2 py-0.5 rounded text-[10px] font-mono text-text-dim border border-border bg-bg hover:text-text-bright hover:border-border-hover transition-colors tnum"
                       >
                         <span className="inline-flex items-center gap-1">
@@ -880,7 +880,7 @@ function ProjectsSection() {
           ))}
         </div>
 
-        {/* Compact grid — quieter palette, no per-card accent colors */}
+        {/* Compact grid: quieter palette, no per-card accent colors */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
           {other.map((project, i) => (
             <motion.div
@@ -948,7 +948,7 @@ function ProjectsSection() {
 /* ──────────────────── Skills ──────────────────── */
 /**
  * Restraint pass: one accent for AI/LLM (purple), one for everything else
- * (muted text-bright). Six-color category palette removed — it read as
+ * (muted text-bright). Six-color category palette removed; it read as
  * hackathon dashboard, not Staff-band engineer.
  */
 
@@ -976,7 +976,7 @@ function SkillsSection() {
       <div className="max-w-4xl mx-auto">
         <SectionLabel icon={Layers} label="Skills & Tools" />
 
-        {/* Currently shipping with — the line a hiring manager screens on */}
+        {/* Currently shipping with: the line a hiring manager screens on */}
         <div className="mb-8 p-5 rounded-xl bg-bg-card border border-border">
           <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-text-dim mb-3">
             Currently shipping with
@@ -1047,7 +1047,7 @@ function SkillsSection() {
 
 /* ──────────────────── Contact ──────────────────── */
 /**
- * Brand voice lives here — not in the hero. The hero is for proof;
+ * Brand voice lives here, not in the hero. The hero is for proof;
  * the closer is for personality. One large CTA, one response-time
  * line, explicit geography, secondary links.
  */
