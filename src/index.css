@@ -1,20 +1,36 @@
 @import "tailwindcss";
 
+/*
+ * ─────────────────────────────────────────────────────────────────
+ * Editorial cream theme (Anthropic-adjacent).
+ *
+ * Surfaces:  warm parchment (#FBF8F1) with white cards
+ * Type:      near-black ink (#1A1815) for headings, warm gray for body
+ * Accent:    terracotta amber (#B8662D) — single decisive accent
+ * Support:   deep brown (was violet), sage (was green) — used sparingly
+ *
+ * The brief: a serious essay / audit-firm aesthetic, not a hackathon
+ * dashboard. Whitespace, typography, restraint do the work.
+ * ─────────────────────────────────────────────────────────────────
+ */
+
 @theme {
-  --color-bg: #0a0a0b;
-  --color-bg-card: #111113;
-  --color-bg-card-hover: #18181b;
-  --color-border: #1e1e22;
-  --color-border-hover: #2a2a30;
-  --color-text: #a1a1aa;
-  --color-text-bright: #fafafa;
-  --color-text-dim: #52525b;
-  --color-accent: #3b82f6;
-  --color-accent-dim: rgba(59, 130, 246, 0.15);
-  --color-green: #22c55e;
-  --color-green-dim: rgba(34, 197, 94, 0.15);
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --color-bg: #fbf8f1;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #f7f1e3;
+  --color-border: #e6decf;
+  --color-border-hover: #cfc4ab;
+  --color-text: #3d3a33;
+  --color-text-bright: #1a1815;
+  --color-text-dim: #7a766b;
+  --color-accent: #b8662d;
+  --color-accent-dim: rgba(184, 102, 45, 0.1);
+  --color-purple: #7a4f2c;
+  --color-purple-dim: rgba(122, 79, 44, 0.1);
+  --color-green: #557a41;
+  --color-green-dim: rgba(85, 122, 65, 0.12);
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 }
 
 @layer base {
@@ -35,11 +51,12 @@
     color: var(--color-text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "cv11";
   }
 
   ::selection {
     background: var(--color-accent);
-    color: white;
+    color: #fff;
   }
 
   ::-webkit-scrollbar {
@@ -47,85 +64,106 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-bg);
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
     background: var(--color-border);
     border-radius: 3px;
   }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-hover);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
 }
 
-/* Noise texture overlay */
+/* Paper grain — slightly more visible on cream than on black */
 .noise-overlay {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
 }
 
-/* Grid background */
+/* Inverted grid — dark hairlines on cream, barely there */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    linear-gradient(rgba(26, 24, 21, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 24, 21, 0.025) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
-/* Gradient glow */
-.glow {
+/*
+ * Ambient glow — very low opacity on cream so we don't fog the page.
+ * The blur reads like sunlight through paper rather than a dark-mode
+ * orb. If it feels too much, drop opacity to 0.04.
+ */
+.ambient-glow {
   position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.12;
   pointer-events: none;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.08;
 }
 
-/* Animated gradient text */
+/* Editorial gradient text — terracotta to deep brown */
 .gradient-text {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
-  background-size: 200% 200%;
+  background: linear-gradient(135deg, #b8662d 0%, #7a4f2c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 4s ease-in-out infinite;
 }
 
-@keyframes shimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* Status dot pulse */
 .status-pulse {
   animation: pulse-ring 2s ease-in-out infinite;
 }
 
 @keyframes pulse-ring {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.5); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
 }
 
-/* Card hover glow */
+/*
+ * Card edge shimmer on hover only.
+ * On cream we shimmer with a warm amber instead of cool blue.
+ */
 .card-glow {
   position: relative;
   overflow: hidden;
 }
 
 .card-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, transparent 40%, rgba(59, 130, 246, 0.2) 50%, transparent 60%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  background: linear-gradient(
+    135deg,
+    transparent 35%,
+    rgba(184, 102, 45, 0.22) 50%,
+    transparent 65%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
@@ -137,77 +175,56 @@
   opacity: 1;
 }
 
-/* Terminal cursor blink */
-.cursor-blink {
-  animation: blink 1s step-end infinite;
+/* Featured project accent borders — single warm family */
+.project-accent-1 {
+  border-left: 2px solid #b8662d;
+}
+.project-accent-2 {
+  border-left: 2px solid #7a4f2c;
+}
+.project-accent-3 {
+  border-left: 2px solid #557a41;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+.tnum {
+  font-feature-settings: "tnum", "lnum";
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* Marquee */
-.marquee-track {
-  animation: marquee 25s linear infinite;
-  width: max-content;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* Featured project accent borders */
-.project-accent-1 { border-left: 2px solid #3b82f6; }
-.project-accent-2 { border-left: 2px solid #8b5cf6; }
-.project-accent-3 { border-left: 2px solid #22c55e; }
-
-/* Fade in on scroll */
-.fade-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Glow pulse for primary CTA button */
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.25); }
-  50% { box-shadow: 0 0 45px rgba(59, 130, 246, 0.55); }
-}
-
-.btn-glow {
-  animation: glow-pulse 3s ease-in-out infinite;
-}
-
-/* Timeline gradient spine */
+/* Timeline gradient spine — amber fade into beige */
 .timeline-spine {
-  background: linear-gradient(to bottom, rgba(59,130,246,0.6), rgba(30,30,34,0.3));
+  background: linear-gradient(
+    to bottom,
+    rgba(184, 102, 45, 0.55),
+    rgba(230, 222, 207, 0.4)
+  );
 }
 
-/* Contact card multi-glow shadow */
+/*
+ * Contact card glow — single editorial warm wash.
+ * Looks like a spotlight on parchment.
+ */
 .contact-card-glow {
-  box-shadow:
-    0 0 0 1px rgba(59,130,246,0.12),
-    0 0 80px rgba(59,130,246,0.06),
-    0 0 160px rgba(139,92,246,0.04);
+  box-shadow: 0 0 0 1px rgba(184, 102, 45, 0.14),
+    0 4px 24px rgba(184, 102, 45, 0.05),
+    0 24px 80px rgba(122, 79, 44, 0.04);
 }
 
-/* Skill card with category-colored hover glow via CSS vars */
 .skill-card {
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .skill-card:hover {
-  box-shadow: 0 0 0 1px var(--glow-border, rgba(59,130,246,0.3)),
-              0 4px 24px var(--glow-shadow, rgba(59,130,246,0.08));
+  box-shadow: 0 0 0 1px var(--glow-border, rgba(184, 102, 45, 0.28)),
+    0 4px 24px var(--glow-shadow, rgba(184, 102, 45, 0.06));
 }
 
-/* Stronger card-glow shimmer */
-.card-glow::before {
-  background: linear-gradient(135deg, transparent 30%, rgba(59,130,246,0.25) 50%, transparent 70%);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
