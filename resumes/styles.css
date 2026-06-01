@@ -133,6 +133,14 @@ time,
   margin: 0 4pt;
 }
 
+/* Market-positioning line (one-pager) — "here's what I do" */
+.header .headline-summary {
+  font-size: 8.6pt;
+  color: var(--ink);
+  line-height: 1.4;
+  margin: 1pt 0 4pt;
+}
+
 /* Stat chips — scannable signal row for the one-pager header */
 .header .stat-chips {
   display: flex;

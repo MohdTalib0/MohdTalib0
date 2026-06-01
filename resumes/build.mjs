@@ -8,10 +8,10 @@
  *   npm run build:resumes
  *
  * Outputs:
- *   public/Mohd_Talib_Resume.pdf   (one-pager — replaces /resume.pdf alias)
+ *   public/Mohd_Talib_Resume.pdf   (one-pager)
  *   public/Mohd_Talib_CV.pdf       (detailed CV)
- *   public/resume.pdf              (kept as alias for the one-pager so
- *                                   portfolio's /resume.pdf links keep working)
+ *   public/resume.pdf              (alias for the detailed CV so the
+ *                                   portfolio's /resume.pdf links open it)
  */
 
 import { fileURLToPath } from "node:url";
@@ -96,13 +96,13 @@ async function main() {
       await renderPdf(browser, doc);
     }
 
-    // Keep /resume.pdf as the alias for the one-pager so the portfolio's
-    // existing <a href="/resume.pdf"> links keep working without edits.
+    // /resume.pdf aliases the detailed CV so the portfolio's existing
+    // <a href="/resume.pdf"> links open the 3-page CV without edits.
     await copyFile(
-      resolve(publicDir, "Mohd_Talib_Resume.pdf"),
+      resolve(publicDir, "Mohd_Talib_CV.pdf"),
       resolve(publicDir, "resume.pdf")
     );
-    console.log("✓  Alias copied → public/resume.pdf");
+    console.log("✓  Alias copied → public/resume.pdf (detailed CV)");
   } finally {
     await browser.close();
   }
