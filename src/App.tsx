@@ -473,9 +473,9 @@ function Hero() {
           transition={{ delay: 0.35, duration: 0.65 }}
           className="text-[2rem] sm:text-5xl md:text-[5.25rem] font-extrabold text-text-bright tracking-tighter leading-[1] sm:leading-[0.95] mb-5 md:mb-6"
         >
-          I ship production
+          I lead teams that ship
           <br />
-          AI systems.{" "}
+          production AI.{" "}
           <span className="gradient-text">0 to 1, in weeks.</span>
         </motion.h1>
 
@@ -487,11 +487,11 @@ function Hero() {
           className="text-base md:text-lg text-text max-w-2xl mb-5 leading-relaxed"
         >
           Tech lead at <span className="text-text-bright font-medium">TheAgentic AI</span>.
-          Previously{" "}
+          Previously, as de facto CTO,{" "}
           <span className="text-text-bright font-medium">
-            built Dumroo 2.0 from scratch in 4 weeks
+            led a 20-engineer team to build Dumroo 2.0 in 4 weeks
           </span>{" "}
-          (promoted to Senior in 6 months), now used by US K-12 schools.{" "}
+          (promoted to Senior in 6 months), now serving 6 US K-12 districts.{" "}
           <span className="text-text-bright">
             ~50% lower inference cost, 2x accuracy, 10x faster onboarding.
           </span>{" "}

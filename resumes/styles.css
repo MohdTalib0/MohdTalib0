@@ -259,15 +259,20 @@ time,
   margin-bottom: 0;
 }
 
+/* Render Role and Date as inline text in document order on the same line,
+   instead of a flex `space-between` row. A right-aligned column places the
+   date in a separate position region that Chrome emits out of order in the
+   PDF content stream — raw-order ATS parsers then read the date detached
+   from its role (e.g. floated below the company line). Inline flow keeps
+   extraction order == visual order across every parser. Applied globally so
+   both the one-pager and the detailed CV are parse-safe. */
 .entry .row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 10pt;
+  display: block;
   margin-bottom: 0;
 }
 
 .entry .role {
+  display: inline;
   font-size: 10pt;
   font-weight: 700;
   color: var(--ink);
@@ -278,6 +283,8 @@ time,
 }
 
 .entry .dates {
+  display: inline;
+  margin-left: 7pt;
   font-family: var(--font-mono);
   font-size: 8pt;
   color: var(--mute);
@@ -411,10 +418,12 @@ time,
 }
 
 /* ─── Skills ────────────────────────────────────────────────────── */
+/* Linearized label/values: a `label | values` grid is a two-column layout,
+   so raw-order ATS parsers read ALL labels first, then all value blocks,
+   severing each label from its skills. Inline flow ("Label: values" on one
+   wrapping line) keeps them bound together. Global — applies to both docs. */
 .skills .row {
-  display: grid;
-  grid-template-columns: 115pt 1fr;
-  gap: 8pt;
+  display: block;
   font-size: 8.8pt;
   line-height: 1.4;
   margin-bottom: 3pt;
@@ -423,11 +432,16 @@ time,
   margin-bottom: 0;
 }
 .skills .label {
+  display: inline;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.005em;
 }
+.skills .label::after {
+  content: ": ";
+}
 .skills .values {
+  display: inline;
   color: var(--mute);
 }
 .skills .values strong {
@@ -499,22 +513,28 @@ time,
   margin-right: 5pt;
 }
 
-/* ─── Certifications (CV only) — 2-column compact grid ─────────── */
+/* ─── Certifications (CV only) ──────────────────────────────────── */
+/* Single column: a 2-column grid extracts in column order (1,3,5 then
+   2,4,6), scrambling reading order for raw-order ATS parsers. Stacking
+   keeps each cert in sequence. Title + issuer kept inline on one line so
+   each entry parses as a unit. */
 .certs .certs-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 16pt;
-  row-gap: 2pt;
+  display: block;
 }
 .certs .item {
   font-size: 8.8pt;
-  line-height: 1.35;
+  line-height: 1.4;
+  margin-bottom: 1pt;
   break-inside: avoid;
 }
 .certs .item strong {
   font-weight: 600;
   color: var(--ink);
-  display: block;
+}
+.certs .item strong::after {
+  content: " · ";
+  color: var(--subtle);
+  font-weight: 400;
 }
 .certs .item .issuer {
   color: var(--mute);

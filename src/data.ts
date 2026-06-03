@@ -1,7 +1,7 @@
 export const personal = {
   name: "Mohd Talib",
   title: "Senior Full Stack AI Engineer",
-  tagline: "I build AI systems that ship. From RAG pipelines to production platforms, 0-to-1 in weeks.",
+  tagline: "I lead teams that ship production AI. From RAG pipelines to multi-agent platforms, 0-to-1 in weeks.",
   email: "mohammad.talib319@gmail.com",
   phone: "+91 7408185999",
   linkedin: "https://linkedin.com/in/mohdtalib",
@@ -22,7 +22,7 @@ export const experience = [
     period: "Nov 2025 - Present",
     current: true,
     bullets: [
-      "Architected the core multi-tenant agentic orchestration engine (seeding the OpenFishh OSS framework), enabling the rapid deployment of 10 production-grade enterprise platforms for 10 clients within 8 months, while maintaining strict tenant data isolation.",
+      "Architected the core multi-tenant agentic orchestration engine (seeding the OpenFishh OSS framework) that enabled the team to deploy 10 production-grade enterprise platforms for 10 clients within 8 months, while maintaining strict tenant data isolation.",
       "CortexON: Contributed core multi-agent task planning and execution APIs to TheAgentic's open-source generalized AI agent (455 GitHub stars).",
       "Enterprise peer-support platform: Architected a multi-tenant, privacy-first platform matching support seekers to mentors from voice stories. Built a safety-gated voice-intake pipeline (transcription, moderation and crisis classifier with human-in-the-loop, structured LLM extraction, multi-vector embeddings) feeding a learned-to-rank matching engine (pgvector ANN + LightGBM lambdarank, self-retraining at near-zero inference cost). Enterprise and university pilots in 2026.",
       "Solunar (Health-Tech): Designed an async vision + LLM pipeline for medical tongue-image analysis, generating automated metabolic insight reports. Multi-tenant APIs and analytics on FastAPI, PostgreSQL, and async SQLAlchemy.",
@@ -43,9 +43,9 @@ export const experience = [
     current: false,
     bullets: [
       "Spearheaded technology strategy as de facto CTO (reporting to CEO), directing a 20-member cross-functional engineering team and managing hiring, developer training, sprint planning, and architectural roadmap execution.",
-      "Built Dumroo 2.0 from scratch in 4 weeks: an AI-driven learning and assessment platform now in production across US K-12 schools. Next.js, TypeScript, Supabase, Vercel, GitHub Actions.",
+      "Led the team to build Dumroo 2.0 from scratch in 4 weeks: an AI-driven learning and assessment platform now in production across US K-12 districts. Next.js, TypeScript, Supabase, Vercel, GitHub Actions.",
       "Designed and engineered the core AI infrastructure of Dumroo 2.0, implementing semantic vector caching and a dynamic LLM routing gateway to cut inference costs by 50% while doubling accuracy.",
-      "Interfaced directly with school administrators and district heads to build role-based access control (RBAC) and automated onboarding pipelines, scaling platform adoption to 6 school districts within 6 months.",
+      "Partnered with school administrators and district heads to ship role-based access control (RBAC) and automated onboarding pipelines, scaling adoption to 6 districts / 10+ schools in 6 months, with 10+ districts in the pipeline.",
       "Architected internal developer productivity and MLOps tooling (automated regression testing and evaluation pipelines), reducing system setup and customer onboarding latency by 10x.",
       "Promoted to Senior within 6 months of joining.",
     ],
@@ -362,12 +362,12 @@ export const proofMetrics = [
   {
     value: "10+",
     label: "Production AI platforms",
-    detail: "Shipped 0-to-1 at TheAgentic AI and Dumroo.ai",
+    detail: "Led delivery 0-to-1 at TheAgentic AI and Dumroo.ai",
   },
   {
     value: "4 wk",
     label: "Dumroo 2.0",
-    detail: "Built from scratch. Now used by US K-12 schools",
+    detail: "Led a 20-engineer team. Now serving 6 US K-12 districts",
   },
   {
     value: "~50%",
