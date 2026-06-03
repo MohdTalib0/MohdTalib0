@@ -21,7 +21,7 @@
   --ink: #0f0e0c;        /* body text — almost-black, warm */
   --mute: #4a463f;       /* secondary text (company, dates) */
   --subtle: #7a766b;     /* tertiary text (separators, captions) */
-  --accent: #b8662d;     /* terracotta — name + section dividers ONLY */
+  --accent: #9e4f1d;     /* terracotta — name + section dividers ONLY */
   --rule: #d9d3c2;       /* hairline rules */
   --paper: #ffffff;      /* paper white, max ATS contrast */
 
@@ -33,7 +33,7 @@
 /* ─── Page setup ────────────────────────────────────────────────── */
 @page {
   size: A4 portrait;
-  margin: 8mm 11mm;
+  margin: 6mm 11mm;
 }
 .doc-onepage {
   /* slightly tighter margins for the strict one-pager */
@@ -85,7 +85,7 @@ time,
 /* ─── Sizing variants ───────────────────────────────────────────── */
 .doc-onepage {
   font-size: 8.8pt;
-  line-height: 1.27;
+  line-height: 1.24;
 }
 .doc-cv {
   font-size: 9.3pt;
@@ -95,8 +95,8 @@ time,
 /* ─── Header ────────────────────────────────────────────────────── */
 .header {
   text-align: left;
-  margin-bottom: 7pt;
-  padding-bottom: 6pt;
+  margin-bottom: 5pt;
+  padding-bottom: 5pt;
   border-bottom: 1.2pt solid var(--accent);
 }
 
@@ -114,7 +114,7 @@ time,
   font-weight: 500;
   color: var(--ink);
   letter-spacing: -0.005em;
-  margin-bottom: 5pt;
+  margin-bottom: 3pt;
 }
 
 /* Header tagline (one-pager only) — three biggest signals above the fold */
@@ -137,8 +137,8 @@ time,
 .header .headline-summary {
   font-size: 8.6pt;
   color: var(--ink);
-  line-height: 1.4;
-  margin: 1pt 0 4pt;
+  line-height: 1.33;
+  margin: 1pt 0 3pt;
 }
 
 /* Stat chips — scannable signal row for the one-pager header */
@@ -172,7 +172,7 @@ time,
 .header .contacts {
   font-size: 8.5pt;
   color: var(--mute);
-  line-height: 1.45;
+  line-height: 1.35;
 }
 .header .contacts a {
   color: var(--ink);
@@ -224,7 +224,7 @@ time,
   margin-top: 8pt;
 }
 .doc-onepage .section {
-  margin-top: 6pt;
+  margin-top: 4pt;
 }
 
 .section > h2 {
@@ -244,7 +244,16 @@ time,
   break-inside: avoid;
 }
 .doc-onepage .entry {
-  margin-bottom: 4pt;
+  margin-bottom: 2pt;
+}
+/* The one-pager is a single page by definition — there is no page 2 to
+   protect, so `break-inside: avoid` only causes blocks to be pushed
+   wholesale past the boundary. Disable it so pagination is purely
+   height-driven and predictable. */
+.doc-onepage .entry,
+.doc-onepage .project,
+.doc-onepage .bottom-row {
+  break-inside: auto;
 }
 .entry:last-child {
   margin-bottom: 0;
@@ -316,7 +325,7 @@ time,
 }
 .doc-onepage .entry ul li {
   font-size: 8.8pt;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 .entry ul li::before {
   content: "";
@@ -534,12 +543,15 @@ time,
   font-weight: 600;
 }
 
-/* ─── Two-column footer row (Education + Recognition) ───────────── */
+/* ─── Footer row (Education + Recognition) ──────────────────────── */
+/* Single column: legacy/regex ATS parsers read multi-column layouts
+   left-to-right across the line and interleave the two sections. Stacking
+   keeps Education then Recognition in clean DOM/reading order. */
 .bottom-row {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 14pt;
-  margin-top: 6pt;
+  grid-template-columns: 1fr;
+  gap: 5pt;
+  margin-top: 5pt;
   break-inside: avoid;
 }
 .bottom-row .section {
