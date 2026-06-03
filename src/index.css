@@ -23,14 +23,32 @@
   --color-text: #3d3a33;
   --color-text-bright: #1a1815;
   --color-text-dim: #7a766b;
-  --color-accent: #b8662d;
-  --color-accent-dim: rgba(184, 102, 45, 0.1);
+  --color-accent: #9e4f1d; /* Accessible terracotta accent (4.5+:1 contrast on cream) */
+  --color-accent-dim: rgba(158, 79, 29, 0.08);
   --color-purple: #7a4f2c;
-  --color-purple-dim: rgba(122, 79, 44, 0.1);
-  --color-green: #557a41;
-  --color-green-dim: rgba(85, 122, 65, 0.12);
+  --color-purple-dim: rgba(122, 79, 44, 0.08);
+  --color-green: #486e35;
+  --color-green-dim: rgba(72, 110, 53, 0.08);
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+}
+
+/* ──────────────────── Editorial Dark Mode Overrides ──────────────────── */
+:root.dark {
+  --color-bg: #141312; /* Warm dark ink background */
+  --color-bg-card: #1c1a18; /* Muted warm dark card */
+  --color-bg-card-hover: #262320; /* Muted hover card */
+  --color-border: #2e2b27; /* Dark warm borders */
+  --color-border-hover: #47433c; /* Hover warm borders */
+  --color-text: #b8b3a9; /* Readable warm parchment text */
+  --color-text-bright: #f4efe6; /* Bright heading parchment */
+  --color-text-dim: #8c877d; /* Muted warm text */
+  --color-accent: #d97d43; /* Bright warm terracotta for dark mode */
+  --color-accent-dim: rgba(217, 125, 67, 0.15);
+  --color-purple: #a67049;
+  --color-purple-dim: rgba(166, 112, 73, 0.15);
+  --color-green: #7d9e6c;
+  --color-green-dim: rgba(125, 158, 108, 0.15);
 }
 
 @layer base {
@@ -52,6 +70,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "ss01", "cv11";
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
@@ -94,6 +113,12 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
+  transition: opacity 0.3s ease;
+}
+
+:root.dark .noise-overlay {
+  opacity: 0.045;
+  mix-blend-mode: overlay;
 }
 
 /* Inverted grid: dark hairlines on cream, barely there */
@@ -102,6 +127,12 @@
     linear-gradient(rgba(26, 24, 21, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(26, 24, 21, 0.025) 1px, transparent 1px);
   background-size: 64px 64px;
+}
+
+:root.dark .grid-bg {
+  background-image:
+    linear-gradient(rgba(244, 239, 230, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 239, 230, 0.015) 1px, transparent 1px);
 }
 
 /*
@@ -115,11 +146,16 @@
   border-radius: 50%;
   filter: blur(140px);
   opacity: 0.08;
+  transition: opacity 0.3s ease;
+}
+
+:root.dark .ambient-glow {
+  opacity: 0.14;
 }
 
 /* Editorial gradient text: terracotta to deep brown */
 .gradient-text {
-  background: linear-gradient(135deg, #b8662d 0%, #7a4f2c 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-text-bright) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -159,7 +195,7 @@
   background: linear-gradient(
     135deg,
     transparent 35%,
-    rgba(184, 102, 45, 0.22) 50%,
+    var(--color-accent) 50%,
     transparent 65%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box,
@@ -169,21 +205,30 @@
   opacity: 0;
   transition: opacity 0.4s;
   pointer-events: none;
+  z-index: 10;
 }
 
 .card-glow:hover::before {
-  opacity: 1;
+  opacity: 0.3;
+}
+
+:root.dark .card-glow::before {
+  opacity: 0;
+}
+
+:root.dark .card-glow:hover::before {
+  opacity: 0.4;
 }
 
 /* Featured project accent borders: single warm family */
 .project-accent-1 {
-  border-left: 2px solid #b8662d;
+  border-left: 2px solid var(--color-accent);
 }
 .project-accent-2 {
-  border-left: 2px solid #7a4f2c;
+  border-left: 2px solid var(--color-purple);
 }
 .project-accent-3 {
-  border-left: 2px solid #557a41;
+  border-left: 2px solid var(--color-green);
 }
 
 .tnum {
@@ -195,8 +240,17 @@
 .timeline-spine {
   background: linear-gradient(
     to bottom,
-    rgba(184, 102, 45, 0.55),
-    rgba(230, 222, 207, 0.4)
+    rgba(158, 79, 29, 0.45),
+    rgba(230, 222, 207, 0.2)
+  );
+  transition: background 0.3s ease;
+}
+
+:root.dark .timeline-spine {
+  background: linear-gradient(
+    to bottom,
+    rgba(217, 125, 67, 0.45),
+    rgba(46, 43, 39, 0.2)
   );
 }
 
@@ -205,17 +259,24 @@
  * Looks like a spotlight on parchment.
  */
 .contact-card-glow {
-  box-shadow: 0 0 0 1px rgba(184, 102, 45, 0.14),
-    0 4px 24px rgba(184, 102, 45, 0.05),
+  box-shadow: 0 0 0 1px var(--color-border),
+    0 4px 24px var(--color-accent-dim),
     0 24px 80px rgba(122, 79, 44, 0.04);
+  transition: box-shadow 0.3s ease;
+}
+
+:root.dark .contact-card-glow {
+  box-shadow: 0 0 0 1px var(--color-border),
+    0 4px 24px rgba(217, 125, 67, 0.08),
+    0 24px 80px rgba(166, 112, 73, 0.06);
 }
 
 .skill-card {
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .skill-card:hover {
-  box-shadow: 0 0 0 1px var(--glow-border, rgba(184, 102, 45, 0.28)),
-    0 4px 24px var(--glow-shadow, rgba(184, 102, 45, 0.06));
+  box-shadow: 0 0 0 1px var(--glow-border, var(--color-border-hover)),
+    0 4px 24px var(--glow-shadow, var(--color-accent-dim));
 }
 
 @media (prefers-reduced-motion: reduce) {

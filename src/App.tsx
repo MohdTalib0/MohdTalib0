@@ -19,6 +19,8 @@ import {
   CalendarClock,
   Menu,
   X,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 import {
@@ -114,7 +116,7 @@ function SectionLabel({
 
 /* ──────────────────── Navbar ──────────────────── */
 
-function Navbar() {
+function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -207,7 +209,24 @@ function Navbar() {
               Resume
               <Download size={12} aria-hidden="true" />
             </a>
-            <div className="ml-2 flex items-center gap-1 border-l border-border pl-3">
+            <a
+              href={personal.calendar}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 text-sm text-text hover:text-text-bright transition-colors rounded-lg hover:bg-bg-card inline-flex items-center gap-1.5"
+            >
+              Book Call
+              <CalendarClock size={13} aria-hidden="true" />
+            </a>
+            <div className="ml-2 flex items-center gap-1.5 border-l border-border pl-3">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="p-1.5 rounded-lg text-text-dim hover:text-text-bright hover:bg-bg-card transition-all mr-0.5 cursor-pointer"
+                aria-label="Toggle dark mode"
+              >
+                {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+              </button>
               <a
                 href={personal.github}
                 target="_blank"
@@ -229,7 +248,7 @@ function Navbar() {
             </div>
             <a
               href={`mailto:${personal.email}`}
-              className="ml-2 px-4 py-1.5 text-sm bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors"
+              className="ml-2 px-4 py-1.5 text-sm bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors font-semibold"
             >
               Get in touch
             </a>
@@ -327,25 +346,38 @@ function Navbar() {
               </nav>
 
               <div className="px-5 py-5 border-t border-border flex flex-col gap-3 shrink-0">
-                <div className="flex items-center gap-2">
-                  <a
-                    href={personal.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-lg text-text-dim hover:text-text-bright hover:bg-bg transition-colors"
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={personal.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub"
+                      className="inline-flex items-center justify-center w-10 h-10 rounded-lg text-text-dim hover:text-text-bright hover:bg-bg transition-colors"
+                    >
+                      <GitHubIcon size={18} />
+                    </a>
+                    <a
+                      href={personal.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                      className="inline-flex items-center justify-center w-10 h-10 rounded-lg text-text-dim hover:text-text-bright hover:bg-bg transition-colors"
+                    >
+                      <LinkedinIcon size={18} />
+                    </a>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      toggleTheme();
+                      setMobileOpen(false);
+                    }}
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-lg text-text-dim hover:text-text-bright hover:bg-bg transition-colors border border-border cursor-pointer"
+                    aria-label="Toggle dark mode"
                   >
-                    <GitHubIcon size={18} />
-                  </a>
-                  <a
-                    href={personal.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-lg text-text-dim hover:text-text-bright hover:bg-bg transition-colors"
-                  >
-                    <LinkedinIcon size={18} />
-                  </a>
+                    {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                  </button>
                 </div>
                 <a
                   href={`mailto:${personal.email}`}
@@ -603,23 +635,33 @@ function MetricsStrip() {
  */
 
 function TrustStrip() {
+  const brandStyles: Record<string, string> = {
+    "TheAgentic AI": "font-serif tracking-tight font-extrabold italic text-sm md:text-base",
+    "Dumroo.ai": "font-sans tracking-tighter font-black text-xs md:text-sm uppercase",
+    "Omdena": "font-mono tracking-widest font-bold text-[11px] md:text-xs uppercase",
+    "CodeSpaze": "font-sans tracking-tight font-semibold text-xs md:text-sm lowercase",
+    "Techpile": "font-mono tracking-normal font-medium text-xs md:text-sm",
+    "Innomatics": "font-serif tracking-widest font-normal text-xs md:text-sm uppercase",
+  };
+
   return (
-    <div className="relative px-5 md:px-6 py-7 md:py-8 border-b border-border">
-      <div className="max-w-6xl mx-auto flex flex-col items-center gap-3 md:gap-4">
+    <div className="relative px-5 md:px-6 py-7 md:py-8 border-b border-border bg-bg-card/20">
+      <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 md:gap-5">
         <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-text-dim">
           Selected collaborations
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 gap-y-1.5 md:gap-y-2 text-[13px] md:text-sm">
-          {collaborations.map((co, i) => (
-            <span key={co} className="inline-flex items-center gap-3 md:gap-5">
-              <span className="text-text font-medium tracking-tight">{co}</span>
-              {i < collaborations.length - 1 && (
-                <span className="text-text-dim/50 select-none" aria-hidden="true">
-                  ·
-                </span>
-              )}
-            </span>
-          ))}
+        <div className="flex flex-wrap items-center justify-center gap-x-8 md:gap-x-12 gap-y-3.5 md:gap-y-4">
+          {collaborations.map((co) => {
+            const fontStyle = brandStyles[co] || "font-sans font-medium";
+            return (
+              <span
+                key={co}
+                className={`text-text opacity-40 hover:opacity-100 hover:scale-105 cursor-default transition-all duration-300 select-none ${fontStyle}`}
+              >
+                {co}
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -1220,10 +1262,34 @@ function Footer() {
 /* ──────────────────── App ──────────────────── */
 
 export default function App() {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("theme");
+      if (saved) return saved;
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      return prefersDark ? "dark" : "light";
+    }
+    return "light";
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
+
   return (
     <div className="relative grid-bg">
       <div className="noise-overlay" />
-      <Navbar />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       <Hero />
       <MetricsStrip />
       <TrustStrip />
