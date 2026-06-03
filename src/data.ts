@@ -1,6 +1,6 @@
 export const personal = {
   name: "Mohd Talib",
-  title: "Senior Full Stack AI Engineer",
+  title: "AI Engineering Lead · Full-Stack",
   tagline: "I lead teams that ship production AI. From RAG pipelines to multi-agent platforms, 0-to-1 in weeks.",
   email: "mohammad.talib319@gmail.com",
   phone: "+91 7408185999",

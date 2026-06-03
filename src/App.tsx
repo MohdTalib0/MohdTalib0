@@ -463,7 +463,7 @@ function Hero() {
           transition={{ delay: 0.25 }}
           className="text-xs md:text-sm font-mono uppercase tracking-[0.18em] text-text-dim mb-5"
         >
-          Mohd Talib · Senior Full Stack AI Engineer &amp; Tech Lead
+          Mohd Talib · AI Engineering Lead · Full-Stack
         </motion.p>
 
         {/* Headline: value claim, not brand voice */}
@@ -1211,7 +1211,7 @@ function Footer() {
               <span className="text-accent font-mono">{">"}</span> {personal.name}
             </div>
             <p className="text-xs text-text-dim">
-              Senior Full Stack AI Engineer &amp; Tech Lead. Building production AI systems.
+              AI Engineering Lead · Full-Stack. Building production AI systems.
             </p>
             <a
               href="/resume.pdf"
