@@ -1,0 +1,198 @@
+%-------------------------------------------------------------------------------
+% Mohd Talib - Resume
+% Based on the Jake Gutierrez / sb2nov template (the "Soham Parekh" format):
+% single column, ATS-parsable text layer, dense and skimmable.
+% Compile with pdfLaTeX (Overleaf: set compiler to pdfLaTeX).
+%-------------------------------------------------------------------------------
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fontawesome5}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+% ---- Page setup ----
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+\setlength{\footskip}{14pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% ---- Section formatting ----
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% ---- Make the PDF machine readable / ATS parsable ----
+\pdfgentounicode=1
+
+% ---- Link color for header handles ----
+\definecolor{linkblue}{HTML}{2A5DB0}
+
+% ---- Custom commands ----
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\newcommand{\sep}{\(\cdot\)}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+% ---- Heading ----
+\begin{center}
+    {\Huge \scshape Mohd Talib} \\ \vspace{4pt}
+    \small AI Engineering Lead \sep{} Full-Stack \\ \vspace{5pt}
+    \small
+    \href{mailto:mohammad.talib319@gmail.com}{\faEnvelope\ \textcolor{linkblue}{mohammad.talib319@gmail.com}} \sep{}
+    \href{https://mohdtalib.netlify.app}{\faGlobe\ \textcolor{linkblue}{Portfolio}} \sep{}
+    \href{https://github.com/MohdTalib0}{\faGithub\ \textcolor{linkblue}{github.com/MohdTalib0}} \sep{}
+    \href{https://linkedin.com/in/mohdtalib}{\faLinkedin\ \textcolor{linkblue}{linkedin.com/in/mohdtalib}}
+    % Phone removed for a cleaner header. To restore, add this line above with a \sep{}:
+    % \faPhone\ +91 7408 185 999
+\end{center}
+
+% ---- Experience ----
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {TheAgentic AI}{Nov 2025 - Present}
+      {Tech Lead \sep{} Senior Full Stack AI Engineer}{Applied AI Research, California \sep{} Remote}
+      \resumeItemListStart
+        \resumeItem{Built the core multi-tenant agentic engine (now the OpenFishh OSS framework) that let the team ship 10 enterprise platforms for 10 clients in 8 months, with strict tenant isolation.}
+        \resumeItem{Replaced black-box RAG with auditable deterministic SQL + LLM orchestration, and built a safety-gated peer-support voice matching engine (pgvector ANN + LightGBM lambdarank) that self-retrains at near-zero inference cost.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Dumroo.ai}{Mar 2025 - Nov 2025}
+      {Tech Lead}{AI EdTech, New Jersey \sep{} Remote}
+      \resumeItemListStart
+        \resumeItem{As de facto CTO (reporting to CEO), led a 20-engineer team to build Dumroo 2.0 from scratch in 4 weeks and take it to production, with 10+ districts in the pipeline.}
+        \resumeItem{Owned the core AI architecture: semantic vector caching and LLM routing (50\% cost cut, 2x accuracy) and RBAC onboarding pipelines (10x faster setup). Promoted to Senior in 6 months.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {CodeSpaze}{Apr 2024 - Feb 2025}
+      {Head of AI \& Engineering (returned to lead)}{Software, Web \& AI Development \sep{} Remote}
+      \resumeItemListStart
+        \resumeItem{Led a 20-person team to 3x MRR growth by standardizing ML templates and scaling developer onboarding to a pipeline of 10,000+ candidates.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Techpile Technology}{Jul 2023 - Apr 2024}
+      {Software Engineer \& Data Analyst}{Lucknow, India \sep{} On-site}
+      \resumeItemListStart
+        \resumeItem{Built high-volume .NET Core APIs and tuned SQL schemas (40\% lower query latency); owned client delivery from build to handoff, winning renewals and new revenue.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Omdena}{Mar 2023 - Jul 2023}
+      {Machine Learning Engineer to Data Engineering Lead (Contract)}{Global AI for Social Good, New York \sep{} Remote}
+      \resumeItemListStart
+        \resumeItem{Led data engineering across a 60+ engineer, 15-country team, building a semi-automated active-learning annotation pipeline that cleared 100K+ images in 3 weeks and shipped the YOLOv8 system ahead of schedule.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {CodeSpaze}{Jul 2021 - Feb 2023}
+      {Software Engineer}{Software, Web \& AI Development \sep{} Remote}
+      \resumeItemListStart
+        \resumeItem{Shipped 8+ client applications on 2 to 3 week cycles, cutting setup time 30\% with reusable component libraries.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+% ---- Projects ----
+\section{Selected Projects}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+      {\textbf{OpenFishh} $|$ \emph{Python, FastAPI, PostgreSQL, pgvector, OpenAI, LangChain}}{\href{https://openfishh.com}{\faGlobe\ \textcolor{linkblue}{Live}} \sep{} \href{https://github.com/MohdTalib0/OpenFishh}{\faGithub\ \textcolor{linkblue}{Code}}}
+      \resumeItemListStart
+        \resumeItem{Open-source agent infrastructure: persistent memory, provenance, agent orchestration, and reliable multi-agent execution. Apache 2.0, 17 stars.}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{TalPred AI} $|$ \emph{XGBoost, PostgreSQL, Redis, MLflow, React}}{\href{https://github.com/MohdTalib0/TalPred-AI}{\faGithub\ \textcolor{linkblue}{Code}}}
+      \resumeItemListStart
+        \resumeItem{Production-grade equity alpha system: automated daily cross-sectional predictions, paper trading, monitoring, and signal-decay tracking with calibrated backtesting.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+% ---- Technical Skills ----
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{AI Systems}{: Agent Orchestration, Agent Memory, Multi-Agent Systems, AI Reliability, RAG, Tool Calling, LLM Evaluation, LangChain, OpenAI \& Anthropic APIs} \\ \vspace{2pt}
+     \textbf{Full-Stack Engineering}{: Next.js, React, TypeScript, FastAPI, Python, Node.js, PostgreSQL, pgvector, Redis} \\ \vspace{2pt}
+     \textbf{Infrastructure}{: Docker, CI/CD, GitHub Actions, AWS, Vercel, observability, async architectures, REST API design} \\ \vspace{2pt}
+     \textbf{Leadership \& Process}{: Technical Leadership, Agile/Scrum, Sprint Planning, Hiring \& Mentoring, Code Review, System Design, Stakeholder Management}
+    }}
+ \end{itemize}
+
+% ---- Education ----
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Sagar Institute of Technology \& Management}{2019 - 2023}
+      {B.Tech, Computer Science \& Engineering}{Barabanki, India}
+  \resumeSubHeadingListEnd
+
+% ---- Recognition removed to keep a true one-pager.
+%      To restore, paste this back above \end{document}:
+% \section{Recognition}
+%  \begin{itemize}[leftmargin=0.15in, itemsep=1pt]
+%     \small
+%     \item \textbf{Apache 2.0 open-source author} \sep{} OpenFishh (17 stars, 3 forks)
+%     \item \textbf{Fastest promotion to Senior} \sep{} at Dumroo.ai, 2025
+%     \item \textbf{Best Performer: Software Developer} \sep{} at Techpile, 2023
+%     \item \textbf{Top 10, Data Science Hackathon} \sep{} at Innomatics, 2023
+%  \end{itemize}
+
+\end{document}
