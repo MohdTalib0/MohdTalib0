@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mohd Talib - portfolio sharing preview</title>
+    <style>
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../public/fonts/inter-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("../public/fonts/jetbrains-mono-latin.woff2") format("woff2");
+}
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        width: 1200px;
+        height: 630px;
+        padding: 54px 64px;
+        background: #fbf8f1;
+        color: #1a1815;
+        font-family: Inter, sans-serif;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .label {
+        color: #6c685f;
+        font:
+          12px "JetBrains Mono",
+          monospace;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      header strong {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      h1 {
+        font-size: 78px;
+        font-weight: 600;
+        letter-spacing: -5px;
+        line-height: 1.06;
+        margin-top: 56px;
+      }
+      h1 span {
+        color: #9e4f1d;
+      }
+      .position {
+        font-size: 17px;
+        margin-top: 22px;
+        color: #3d3a33;
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 40px;
+        padding-top: 22px;
+        border-top: 1px solid #e6decf;
+        gap: 30px;
+      }
+      .metric strong {
+        font-size: 32px;
+        letter-spacing: -1px;
+        font-weight: 600;
+      }
+      .metric p {
+        font-size: 12px;
+        color: #6c685f;
+        margin-top: 7px;
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>Mohd Talib</strong><span class="label">Engineering Lead</span>
+    </header>
+    <h1>Engineering AI<br /><span>for production.</span></h1>
+    <p class="position">AI Platforms &amp; Infrastructure · Applied AI Systems</p>
+    <div class="metrics">
+      <div class="metric">
+        <strong>40% → 95%</strong>
+        <p>NVIDIA program acceptance</p>
+      </div>
+      <div class="metric">
+        <strong>~90%</strong>
+        <p>Fewer manual technical checks</p>
+      </div>
+      <div class="metric">
+        <strong>50%</strong>
+        <p>Lower LLM inference costs</p>
+      </div>
+    </div>
+    <footer>
+      <span class="label">Architecture · Evaluation · Delivery</span
+      ><span class="label">mohdtalib.netlify.app</span>
+    </footer>
+  </body>
+</html>

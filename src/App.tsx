@@ -1,21 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView, AnimatePresence, MotionConfig } from "framer-motion";
 import {
   ArrowUpRight,
   Mail,
   MapPin,
-  ExternalLink,
   ChevronRight,
-  Briefcase,
-  Code2,
-  Layers,
   Clock,
-  Sparkles,
-  Star,
-  GitFork,
   Download,
-  GraduationCap,
-  Award,
   CalendarClock,
   Menu,
   X,
@@ -26,15 +17,10 @@ import {
 import {
   personal,
   experience,
-  projects,
-  skills,
   proofMetrics,
-  collaborations,
   availability,
-  education,
-  awards,
-  currentStack,
 } from "./data";
+import { Hero, WorkSection, ExpertiseSection } from "./components/PortfolioSections";
 
 /* ──────────────────── Inline brand icons ──────────────────── */
 
@@ -96,31 +82,16 @@ function Section({
   );
 }
 
-function SectionLabel({
-  icon: Icon,
-  label,
-}: {
-  icon: React.ElementType;
-  label: string;
-}) {
-  return (
-    <div className="flex items-center gap-3 mb-10">
-      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-dim border border-accent/20 text-accent text-[11px] font-semibold tracking-widest uppercase">
-        <Icon size={13} aria-hidden="true" />
-        {label}
-      </div>
-      <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
-    </div>
-  );
-}
-
 /* ──────────────────── Navbar ──────────────────── */
+
+const navLinks = ["projects", "experience", "skills", "contact"];
+const navLabels: Record<string, string> = { projects: "Work", experience: "Experience", skills: "Expertise", contact: "Contact" };
 
 function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const links = ["experience", "projects", "skills", "contact"];
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -134,7 +105,7 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
-    links.forEach((id) => {
+    navLinks.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -145,21 +116,47 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
     };
   }, []);
 
+  // Close the drawer when desktop navigation replaces it, releasing scroll lock.
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onBreakpointChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setMobileOpen(false);
+    };
+    desktop.addEventListener("change", onBreakpointChange);
+    return () => desktop.removeEventListener("change", onBreakpointChange);
+  }, []);
+
   // Body scroll lock + Esc-to-close while the drawer is open.
   // Restoring overflow on cleanup is important; a stuck "hidden"
   // state silently breaks the whole page after navigation.
   useEffect(() => {
     if (!mobileOpen) return;
     const prevOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement;
     document.body.style.overflow = "hidden";
+    menuRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobileOpen(false);
+      if (e.key === "Tab") {
+        const focusable = menuRef.current?.querySelectorAll<HTMLElement>("a[href], button");
+        if (!focusable?.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
 
     return () => {
       document.body.style.overflow = prevOverflow;
+      if (previousFocus instanceof HTMLElement) previousFocus.focus();
       window.removeEventListener("keydown", onKey);
     };
   }, [mobileOpen]);
@@ -180,14 +177,14 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
           <a
             href="#"
             className="text-text-bright font-semibold text-lg tracking-tight"
-            aria-label="Home · Mohd Talib"
+            aria-label="MT / Mohd Talib - Home"
           >
-            <span className="text-accent font-mono">{">"}</span> MT
+            <span className="text-accent font-mono text-sm mr-2">MT /</span> Mohd Talib
           </a>
 
           {/* Desktop nav (md+) */}
-          <div className="hidden md:flex items-center gap-1">
-            {links.map((link) => (
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => (
               <a
                 key={link}
                 href={`#${link}`}
@@ -197,7 +194,7 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
                     : "text-text hover:text-text-bright"
                 }`}
               >
-                {link.charAt(0).toUpperCase() + link.slice(1)}
+                {navLabels[link]}
               </a>
             ))}
             <a
@@ -208,15 +205,6 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
             >
               Resume
               <Download size={12} aria-hidden="true" />
-            </a>
-            <a
-              href={personal.calendar}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-1.5 text-sm text-text hover:text-text-bright transition-colors rounded-lg hover:bg-bg-card inline-flex items-center gap-1.5"
-            >
-              Book Call
-              <CalendarClock size={13} aria-hidden="true" />
             </a>
             <div className="ml-2 flex items-center gap-1.5 border-l border-border pl-3">
               <button
@@ -261,7 +249,7 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
             aria-label="Open menu"
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 -mr-2 rounded-lg text-text-bright hover:bg-bg-card transition-colors"
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 -mr-2 rounded-lg text-text-bright hover:bg-bg-card transition-colors"
           >
             <Menu size={22} aria-hidden="true" />
           </button>
@@ -280,9 +268,10 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
               transition={{ duration: 0.18 }}
               onClick={() => setMobileOpen(false)}
               aria-hidden="true"
-              className="md:hidden fixed inset-0 z-[60] bg-text-bright/30 backdrop-blur-sm"
+              className="lg:hidden fixed inset-0 z-[60] bg-text-bright/30 backdrop-blur-sm"
             />
             <motion.div
+              ref={menuRef}
               key="drawer"
               id="mobile-menu"
               role="dialog"
@@ -292,10 +281,10 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-              className="md:hidden fixed top-0 right-0 bottom-0 z-[70] w-[86vw] max-w-[340px] bg-bg-card border-l border-border flex flex-col shadow-[0_0_40px_rgba(26,24,21,0.12)]"
+              className="lg:hidden fixed top-0 right-0 bottom-0 z-[70] w-[86vw] max-w-[340px] bg-bg-card border-l border-border flex flex-col shadow-[0_0_40px_rgba(26,24,21,0.12)]"
             >
               <div className="flex items-center justify-between px-5 h-16 border-b border-border shrink-0">
-                <span className="text-text-bright font-semibold text-sm">
+                <span className="text-text-bright font-semibold text-base">
                   <span className="text-accent font-mono">{">"}</span> Menu
                 </span>
                 <button
@@ -309,7 +298,7 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
               </div>
 
               <nav className="flex-1 overflow-y-auto px-3 py-4 flex flex-col gap-0.5">
-                {links.map((link) => (
+                {navLinks.map((link) => (
                   <a
                     key={link}
                     href={`#${link}`}
@@ -320,7 +309,7 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
                         : "text-text hover:text-text-bright hover:bg-bg"
                     }`}
                   >
-                    {link.charAt(0).toUpperCase() + link.slice(1)}
+                    {navLabels[link]}
                   </a>
                 ))}
                 <a
@@ -402,193 +391,6 @@ function Navbar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void
  * Hierarchy: title → proof → primary CTA. Brand voice is moved to Contact.
  */
 
-function Hero() {
-  return (
-    <section
-      id="top"
-      className="relative min-h-[88vh] flex flex-col justify-center px-5 md:px-6 overflow-hidden"
-    >
-      {/* Single ambient glow (replaces parallax orbs) */}
-      <div
-        className="ambient-glow bg-accent"
-        style={{
-          width: 720,
-          height: 720,
-          left: "-10%",
-          top: "10%",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="ambient-glow bg-purple"
-        style={{
-          width: 520,
-          height: 520,
-          right: "-5%",
-          top: "30%",
-          opacity: 0.05,
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="relative z-10 max-w-5xl mx-auto pt-24 md:pt-28 w-full">
-        {/* Status row */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="flex flex-wrap items-center gap-2 mb-7"
-        >
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-dim border border-green/20">
-            <span className="relative flex h-2 w-2">
-              <span className="status-pulse absolute inline-flex h-full w-full rounded-full bg-green opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green" />
-            </span>
-            <span className="text-xs text-green font-medium">Open to Staff &amp; Lead roles</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-bg-card border border-border text-xs text-text-dim">
-            <MapPin size={12} aria-hidden="true" />
-            Based in {availability.base} · Remote / {availability.remoteFor.join(" / ")}
-          </span>
-          <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-bg-card border border-border text-xs text-text-dim">
-            <Sparkles size={12} aria-hidden="true" />
-            Tech Lead @ TheAgentic AI
-          </span>
-        </motion.div>
-
-        {/* Title */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="text-xs md:text-sm font-mono uppercase tracking-[0.18em] text-text-dim mb-5"
-        >
-          Mohd Talib · AI Engineering Lead · Full-Stack
-        </motion.p>
-
-        {/* Headline: value claim, not brand voice */}
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.65 }}
-          className="text-[2rem] sm:text-5xl md:text-[5.25rem] font-extrabold text-text-bright tracking-tighter leading-[1] sm:leading-[0.95] mb-5 md:mb-6"
-        >
-          I lead teams that ship
-          <br />
-          production AI.{" "}
-          <span className="gradient-text">0 to 1, in weeks.</span>
-        </motion.h1>
-
-        {/* Proof paragraph: concrete, defensible, scannable */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-base md:text-lg text-text max-w-2xl mb-5 leading-relaxed"
-        >
-          Tech lead at <span className="text-text-bright font-medium">TheAgentic AI</span>.
-          Previously, as de facto CTO,{" "}
-          <span className="text-text-bright font-medium">
-            led a 20-engineer team to build Dumroo 2.0 in 4 weeks
-          </span>{" "}
-          (promoted to Senior in 6 months), now serving 6 US K-12 districts.{" "}
-          <span className="text-text-bright">
-            ~50% lower inference cost, 2x accuracy, 10x faster onboarding.
-          </span>{" "}
-          Agentic AI, RAG, full-stack on FastAPI &amp; Next.js.
-        </motion.p>
-
-        {/* Recognition strip: education + awards, fills the credibility gap */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55 }}
-          className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-text-dim mb-9"
-        >
-          <span className="inline-flex items-center gap-1.5">
-            <GraduationCap size={13} aria-hidden="true" />
-            {education.degree.replace("B.Tech in ", "B.Tech, ")},{" "}
-            {education.school.split(",")[0]} · {education.year}
-          </span>
-          {awards.map((a) => (
-            <span
-              key={a}
-              className="inline-flex items-center gap-1.5"
-            >
-              <span className="text-text-dim/40" aria-hidden="true">·</span>
-              <Award size={13} aria-hidden="true" />
-              {a}
-            </span>
-          ))}
-        </motion.div>
-
-        {/* CTAs: one dominant primary, two ghost secondary. GitHub moved to nav. */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.65 }}
-          className="flex flex-wrap items-center gap-3"
-        >
-          <a
-            href={`mailto:${personal.email}?subject=Re%3A%20your%20portfolio&body=Hi%20Mohd%2C%0A%0A`}
-            className="group flex items-center gap-2 px-6 py-3.5 bg-accent text-white rounded-xl font-semibold hover:bg-accent/90 transition-all hover:shadow-[0_8px_32px_rgba(184,102,45,0.32)]"
-          >
-            <Mail size={18} aria-hidden="true" />
-            <span className="hidden sm:inline">{personal.email}</span>
-            <span className="sm:hidden">Email me</span>
-            <ArrowUpRight
-              size={16}
-              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-              aria-hidden="true"
-            />
-          </a>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-3.5 bg-bg-card border border-border text-text-bright rounded-xl font-medium hover:border-border-hover transition-all"
-          >
-            <Download size={16} aria-hidden="true" />
-            Resume
-          </a>
-          <a
-            href={personal.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-3.5 bg-bg-card border border-border text-text-bright rounded-xl font-medium hover:border-border-hover transition-all"
-          >
-            <LinkedinIcon size={18} />
-            LinkedIn
-          </a>
-        </motion.div>
-
-        {/* Booking tertiary: recruiters who don't want to email can self-serve */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.85 }}
-          className="mt-4"
-        >
-          <a
-            href={personal.calendar}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm text-text-dim hover:text-text-bright transition-colors group"
-          >
-            <CalendarClock size={14} aria-hidden="true" />
-            or book a 15-min call
-            <ArrowUpRight
-              size={12}
-              className="opacity-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-              aria-hidden="true"
-            />
-          </a>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
 /* ──────────────────── Metrics Strip ──────────────────── */
 /**
  * Numbers are first-class typography. Tabular nums, no decoration.
@@ -635,34 +437,13 @@ function MetricsStrip() {
  */
 
 function TrustStrip() {
-  const brandStyles: Record<string, string> = {
-    "TheAgentic AI": "font-serif tracking-tight font-extrabold italic text-sm md:text-base",
-    "Dumroo.ai": "font-sans tracking-tighter font-black text-xs md:text-sm uppercase",
-    "Omdena": "font-mono tracking-widest font-bold text-[11px] md:text-xs uppercase",
-    "CodeSpaze": "font-sans tracking-tight font-semibold text-xs md:text-sm lowercase",
-    "Techpile": "font-mono tracking-normal font-medium text-xs md:text-sm",
-    "Innomatics": "font-serif tracking-widest font-normal text-xs md:text-sm uppercase",
-  };
-
   return (
-    <div className="relative px-5 md:px-6 py-7 md:py-8 border-b border-border bg-bg-card/20">
-      <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 md:gap-5">
-        <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-text-dim">
-          Selected collaborations
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-8 md:gap-x-12 gap-y-3.5 md:gap-y-4">
-          {collaborations.map((co) => {
-            const fontStyle = brandStyles[co] || "font-sans font-medium";
-            return (
-              <span
-                key={co}
-                className={`text-text opacity-40 hover:opacity-100 hover:scale-105 cursor-default transition-all duration-300 select-none ${fontStyle}`}
-              >
-                {co}
-              </span>
-            );
-          })}
-        </div>
+    <div className="px-5 md:px-6 py-6 border-b border-border">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <p className="eyebrow">Enterprise programs supported</p>
+        <ul className="flex flex-wrap gap-x-8 gap-y-3 text-text-bright text-lg font-semibold tracking-tight" aria-label="Enterprise program clients">
+          {["NVIDIA", "ByteDance", "Google"].map(name => <li key={name}>{name}</li>)}
+        </ul>
       </div>
     </div>
   );
@@ -675,8 +456,8 @@ function ExperienceSection() {
 
   return (
     <Section id="experience" className="py-16 md:py-24 px-5 md:px-6">
-      <div className="max-w-4xl mx-auto">
-        <SectionLabel icon={Briefcase} label="Experience" />
+      <div className="max-w-6xl mx-auto">
+        <div className="section-heading"><div><p className="eyebrow">02 / Experience</p><h2>Technical leadership.<br /><span>Hands-on delivery.</span></h2></div><p>Architecture, product delivery and engineering ownership across AI and enterprise systems.</p></div>
 
         <div className="relative">
           <div className="timeline-spine absolute left-[18px] top-4 bottom-4 w-px hidden md:block" />
@@ -711,10 +492,10 @@ function ExperienceSection() {
                   }`}
                   onClick={() => setExpanded(expanded === i ? null : i)}
                 >
-                  <div className="p-5 flex items-start justify-between gap-4">
+                  <div className="p-5 flex flex-col sm:flex-row items-start sm:justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h3 className="text-text-bright font-semibold text-sm">
+                        <h3 className="text-text-bright font-semibold text-base">
                           {exp.role}
                         </h3>
                         {exp.badge && (
@@ -801,292 +582,6 @@ function ExperienceSection() {
   );
 }
 
-/* ──────────────────── Projects ──────────────────── */
-
-function ProjectsSection() {
-  const featured = projects.filter((p) => p.featured);
-  const other = projects.filter((p) => !p.featured);
-
-  return (
-    <Section id="projects" className="py-16 md:py-24 px-5 md:px-6">
-      <div className="max-w-4xl mx-auto">
-        <SectionLabel icon={Code2} label="Selected work" />
-
-        <div className="space-y-4 mb-6">
-          {featured.map((project, i) => (
-            <motion.div
-              key={project.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`card-glow group relative p-6 rounded-xl bg-bg-card border border-border hover:bg-bg-card-hover transition-all hover:-translate-y-0.5 hover:shadow-xl project-accent-${
-                (i % 3) + 1
-              }`}
-            >
-              <div className="flex items-start justify-between mb-2 gap-3">
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <h3 className="text-text-bright font-semibold text-lg">
-                      {project.name}
-                    </h3>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono text-text-dim border border-border bg-bg">
-                      featured
-                    </span>
-                    {"openSource" in project && project.openSource && (
-                      <span className="px-2 py-0.5 rounded text-[10px] font-medium text-green bg-green-dim border border-green/20">
-                        Open source
-                      </span>
-                    )}
-                    {"stars" in project && typeof project.stars === "number" && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${project.name} on GitHub · ${project.stars} stars`}
-                        className="inline-flex items-center gap-2 px-2 py-0.5 rounded text-[10px] font-mono text-text-dim border border-border bg-bg hover:text-text-bright hover:border-border-hover transition-colors tnum"
-                      >
-                        <span className="inline-flex items-center gap-1">
-                          <Star size={11} aria-hidden="true" />
-                          {project.stars}
-                        </span>
-                        {"forks" in project && typeof project.forks === "number" && (
-                          <>
-                            <span className="text-text-dim/40" aria-hidden="true">
-                              ·
-                            </span>
-                            <span className="inline-flex items-center gap-1">
-                              <GitFork size={11} aria-hidden="true" />
-                              {project.forks}
-                            </span>
-                          </>
-                        )}
-                      </a>
-                    )}
-                  </div>
-                  {project.tagline && (
-                    <p className="text-accent text-sm font-medium">
-                      {project.tagline}
-                    </p>
-                  )}
-                </div>
-                <div className="flex gap-2 shrink-0">
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs text-text-dim hover:text-accent hover:bg-accent-dim transition-all"
-                    >
-                      <ExternalLink size={14} aria-hidden="true" />
-                      Live
-                    </a>
-                  )}
-                  {"beta" in project && project.beta && (
-                    <a
-                      href={project.beta as string}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs text-green bg-green-dim border border-green/20 hover:bg-green/20 transition-all"
-                    >
-                      Beta
-                    </a>
-                  )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.name} on GitHub`}
-                      className="p-1.5 rounded-lg text-text-dim hover:text-text-bright hover:bg-bg transition-all"
-                    >
-                      <GitHubIcon size={16} />
-                    </a>
-                  )}
-                </div>
-              </div>
-              <p className="text-sm text-text mb-4 leading-relaxed">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {project.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2 py-0.5 rounded text-[10px] font-mono text-text-dim bg-bg border border-border"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Compact grid: quieter palette, no per-card accent colors */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-          {other.map((project, i) => (
-            <motion.div
-              key={project.name}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="group p-4 rounded-xl bg-bg-card border border-border hover:bg-bg-card-hover hover:border-border-hover transition-all"
-            >
-              <div className="flex items-center justify-between mb-1">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <div className="w-1.5 h-1.5 rounded-full shrink-0 bg-text-dim group-hover:bg-accent transition-colors" />
-                  <h4 className="text-text-bright font-medium text-sm truncate">
-                    {project.name}
-                  </h4>
-                </div>
-                <div className="flex gap-1.5 shrink-0 ml-2">
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.name} live`}
-                      className="text-text-dim hover:text-accent transition-colors"
-                    >
-                      <ExternalLink size={13} aria-hidden="true" />
-                    </a>
-                  )}
-                  {project.github ? (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.name} on GitHub`}
-                      className="text-text-dim hover:text-text-bright transition-colors"
-                    >
-                      <GitHubIcon size={13} />
-                    </a>
-                  ) : (
-                    <Briefcase
-                      size={12}
-                      className="text-text-dim"
-                      aria-hidden="true"
-                    />
-                  )}
-                </div>
-              </div>
-              {project.tagline && (
-                <p className="text-[11px] text-accent mb-1.5">
-                  {project.tagline}
-                </p>
-              )}
-              <p className="text-xs text-text-dim leading-relaxed">
-                {project.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-/* ──────────────────── Skills ──────────────────── */
-/**
- * Restraint pass: one accent for AI/LLM (purple), one for everything else
- * (muted text-bright). Six-color category palette removed; it read as
- * hackathon dashboard, not Staff-band engineer.
- */
-
-function SkillsSection() {
-  const aiAccent = {
-    badge: "text-purple bg-purple-dim border-purple/25",
-    border: "var(--color-purple)",
-    glowBorder: "rgba(122, 79, 44, 0.32)",
-    glowShadow: "rgba(122, 79, 44, 0.08)",
-    primary: "text-purple",
-  };
-
-  const neutral = {
-    badge: "text-text-bright bg-bg-card border-border",
-    border: "var(--color-border-hover)",
-    glowBorder: "rgba(184, 102, 45, 0.24)",
-    glowShadow: "rgba(184, 102, 45, 0.05)",
-    primary: "text-text-bright",
-  };
-
-  const entries = Object.entries(skills);
-
-  return (
-    <Section id="skills" className="py-16 md:py-24 px-5 md:px-6">
-      <div className="max-w-4xl mx-auto">
-        <SectionLabel icon={Layers} label="Skills & Tools" />
-
-        {/* Currently shipping with: the line a hiring manager screens on */}
-        <div className="mb-8 p-5 rounded-xl bg-bg-card border border-border">
-          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-text-dim mb-3">
-            Currently shipping with
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {currentStack.map((t) => (
-              <span
-                key={t}
-                className="px-2.5 py-1 rounded-lg text-xs text-text-bright bg-bg border border-border font-medium"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          {entries.map(([category, items], i) => {
-            const isAI = category === "AI & LLM";
-            const style = isAI ? aiAccent : neutral;
-
-            return (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                style={
-                  {
-                    borderLeft: `2px solid ${style.border}`,
-                    "--glow-border": style.glowBorder,
-                    "--glow-shadow": style.glowShadow,
-                  } as React.CSSProperties
-                }
-                className="skill-card p-5 rounded-xl bg-bg-card border border-border"
-              >
-                <div
-                  className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-lg text-xs font-medium border mb-3 ${style.badge}`}
-                >
-                  {category}
-                  <span className="opacity-60 tnum font-mono">
-                    ({items.length})
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {items.map((skill, j) => (
-                    <span
-                      key={skill}
-                      className={`px-2.5 py-1 rounded-lg text-xs cursor-default transition-colors ${
-                        j < 3
-                          ? `${style.primary} bg-bg border border-border font-medium`
-                          : "text-text-dim bg-bg/50 border border-border/40 hover:border-border"
-                      }`}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </Section>
-  );
-}
-
 /* ──────────────────── Contact ──────────────────── */
 /**
  * Brand voice lives here, not in the hero. The hero is for proof;
@@ -1114,14 +609,13 @@ function ContactSection() {
             </p>
 
             <h2 className="text-[1.75rem] sm:text-3xl md:text-5xl font-extrabold text-text-bright mb-4 tracking-tight leading-[1.05]">
-              Let's build something
+              Have a platform
               <br />
-              <span className="gradient-text">unreasonably good.</span>
+              <span className="gradient-text">worth building?</span>
             </h2>
 
             <p className="text-text mb-8 leading-relaxed max-w-lg mx-auto">
-              Hiring for an AI Tech Lead, Staff Engineer, or 0-to-1 founding role?
-              I read every message and usually reply within a day.
+              I’m interested in roles with meaningful ownership across AI platforms, evaluation and enterprise products. Tell me about the problem, the team and the scope.
             </p>
 
             <div className="flex flex-wrap justify-center gap-3 mb-6">
@@ -1145,7 +639,7 @@ function ContactSection() {
                 className="group flex items-center gap-2 px-6 py-3.5 bg-bg border border-border text-text-bright rounded-xl font-semibold hover:border-border-hover hover:bg-bg-card-hover transition-all"
               >
                 <CalendarClock size={18} aria-hidden="true" />
-                Book a 15 min
+                Book a 15-minute call
                 <ArrowUpRight
                   size={16}
                   className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
@@ -1204,14 +698,14 @@ function ContactSection() {
 function Footer() {
   return (
     <footer className="py-8 md:py-10 px-5 md:px-6 border-t border-border">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <div className="text-text-bright font-semibold text-sm mb-1">
               <span className="text-accent font-mono">{">"}</span> {personal.name}
             </div>
             <p className="text-xs text-text-dim">
-              AI Engineering Lead · Full-Stack. Building production AI systems.
+              Engineering Lead · AI Platforms &amp; Infrastructure · Applied AI Systems.
             </p>
             <a
               href="/resume.pdf"
@@ -1287,17 +781,21 @@ export default function App() {
   };
 
   return (
-    <div className="relative grid-bg">
-      <div className="noise-overlay" />
+    <MotionConfig reducedMotion="user">
+    <div className="relative">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <main id="main-content">
       <Hero />
       <MetricsStrip />
       <TrustStrip />
+      <WorkSection />
       <ExperienceSection />
-      <ProjectsSection />
-      <SkillsSection />
+      <ExpertiseSection />
       <ContactSection />
+      </main>
       <Footer />
     </div>
+    </MotionConfig>
   );
 }

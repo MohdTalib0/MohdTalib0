@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:resumes": "node resumes/build.mjs"
+    "build:resumes": "node resumes/build.mjs",
+    "build:social": "node scripts/build-social-preview.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

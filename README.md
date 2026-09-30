@@ -4,10 +4,10 @@
 
 # Mohd Talib
 
-**Senior Full Stack AI Engineer &middot; Technical Lead**
+**Engineering Lead · AI Platforms & Infrastructure · Applied AI Systems**
 
-I architect and ship production AI platforms from zero to launch in 2-4 weeks.
-RAG pipelines, agentic workflows, LLM orchestration, and full-stack systems that scale.
+I build AI products and enterprise platforms that improve quality, reduce operating costs and make delivery repeatable.
+NVIDIA program acceptance: 40% to 95%. Manual technical checks: approximately 90% lower. Dumroo inference costs: 50% lower.
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://mohdtalib.netlify.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/mohdtalib)
@@ -25,9 +25,11 @@ RAG pipelines, agentic workflows, LLM orchestration, and full-stack systems that
 
 ### About Me
 
-Senior Full Stack AI Engineer at **TheAgentic AI** (Applied AI Research, California). Previously Tech Lead at **Dumroo.ai**, Head of AI at **CodeSpaze**, ML Engineer at **Omdena**.
+Engineering Lead at **Agents Only Technologies** (part of TP.ai Data Services). I lead platform delivery for AI evaluation, media collection, annotation, QA, and operations supporting programs for NVIDIA, ByteDance, and Google. Previously a Technical Lead at **TheAgentic AI** and **Dumroo.ai**, Head of AI at **CodeSpaze**, and ML Engineer at **Omdena**.
 
-I don't pitch ideas. I ship products. Every platform I build goes from concept to production in weeks, not quarters.
+I turn program requirements into reusable systems with measurable improvements in acceptance, review effort, and reliability.
+
+**Indian Institute of Technology Kharagpur (IIT Kharagpur)** — [Technology & AI Leadership](https://online.iitkgp.ac.in/executive-program-technology-and-ai-leadership), Partha Ghosh School of Leadership (2026–2027, in progress). Focus: AI Strategy, Technology Leadership, Responsible AI, Governance & Risk, and Digital Transformation. B.Tech in Computer Science & Engineering, Sagar Institute of Technology & Management (2023).
 
 </td>
 <td width="50%" valign="top">
@@ -37,11 +39,12 @@ I don't pitch ideas. I ship products. Every platform I build goes from concept t
 ```
   5+  years building production systems
  30+  products shipped end-to-end
- 60+  engineers led across teams
+ 20   engineers in teams led
  15+  countries collaborated
-  3   platforms shipped in 2 weeks each
- 50%  inference cost reduction (Dumroo 2.0)
- 10x  onboarding speed improvement
+ 95%  NVIDIA program media acceptance, up from 40%
+~90%  fewer manual technical checks through MediaHub
+ 50%  lower LLM inference costs at Dumroo
+  7   operational tools connected in Prometheus RCA
 ```
 
 </td>
@@ -52,29 +55,25 @@ I don't pitch ideas. I ship products. Every platform I build goes from concept t
 
 ### What I'm Shipping Now
 
-- **Technical Lead at [TheAgentic AI](https://theagentic.ai)** — sole engineer across 3 production platforms (Solunar, H2M, Boxsy.io, KismetAI), each shipped 0-to-1 in 2-4 weeks
-- **[HumanizingLabs](https://humanizing-labs.vercel.app/)** — a persistent collective intelligence system: 1,200 AI agents, 30,000+ beliefs, structured epistemic governance, auditable research reports
-- Architecting **multi-agent AI systems** with structured tool-use orchestration, deterministic SQL + LLM pipelines, and full provenance tracking
+- **Engineering Lead at [Agents Only Technologies](https://www.agentsonly.com/)** — building MediaHub (10,000+ contributors across projects in 2026) and AI Arena for enterprise AI data and evaluation programs
+- **MediaHub** — configurable media validation and QA raised acceptance from 40% to 95% on NVIDIA programs and removed approximately 90% of manual checks
+- **AI Arena** — 6,000+ candidates across model comparison, GMR, medical, coding and STEM assessments in 2026, with controlled access and structured scoring
+- **[HumanizingLabs](https://humanizing-labs.vercel.app/)** — a multi-agent research system across 31 knowledge domains, with sourced memory, structured debate and auditable reports
+- Previously built an **RCA investigation platform** at TheAgentic AI connecting service topology, telemetry, code, Notion, Grafana, Slack, GitHub, Prometheus, and Jira to route evidence-backed likely causes to human owners
 
 ---
 
-### Flagship: HumanizingLabs
+### Selected Engineering Outcomes
 
-<table>
-<tr>
-<td>
+| Work | Business outcome | Engineering depth |
+| --- | --- | --- |
+| **MediaHub** | NVIDIA program acceptance rose from 40% to 95%; manual technical checks fell approximately 90% | Configurable validation, background processing, project-scoped access, reviewer queues, retries and recovery |
+| **Prometheus RCA** | Connected fragmented incident evidence into investigation and postmortem workflows | Alert correlation, service topology, hypothesis comparison, engineer clarification, workspace isolation and controlled publishing |
+| **Dumroo 2.0** | 50% lower inference costs; delivery in four weeks; adoption across six US districts and 10+ schools in six months | Semantic caching, model routing, automated onboarding, evaluation pipelines and leadership of 20 engineers |
 
-**[HumanizingLabs](https://humanizing-labs.vercel.app/)** &nbsp; [![Live](https://img.shields.io/badge/Live-3b82f6?style=flat-square&logo=vercel&logoColor=white)](https://humanizing-labs.vercel.app/)
+The portfolio presents the problem, implementation, engineering decisions and results for these projects.
 
-A living digital society of **1,200 AI agents** across 31 knowledge domains that reads the internet continuously, maintains persistent belief memory with full provenance chains, runs structured debates on contested claims, and produces auditable intelligence reports on demand.
-
-Every belief is typed, sourced, confidence-decomposed, and lifecycle-governed. The system tracks **why** it believes things, **how confident** it should be, and **what would change its mind**.
-
-`Python` `Multi-Agent AI` `OpenAI` `Anthropic` `PostgreSQL` `FastAPI` `Redis` `RAG` `LLM Orchestration`
-
-</td>
-</tr>
-</table>
+**[OpenFishh](https://github.com/MohdTalib0/OpenFishh)** is my open-source multi-agent research platform: sourced claims, confidence scoring, contradiction handling, knowledge graphs and auditable reports. `Python` `FastAPI` `React` `SQLite` `Docker`
 
 ---
 

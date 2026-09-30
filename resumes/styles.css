@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../public/fonts/inter-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("../public/fonts/jetbrains-mono-latin.woff2") format("woff2");
+}
+
 /*
  * ─────────────────────────────────────────────────────────────────
  * Resume + CV — shared print stylesheet.
@@ -643,3 +658,6 @@ h2 + .skills,
 h2 + .awards-row {
   break-before: avoid;
 }
+
+/* Use the literal ASCII tilde glyph for approximation in printed metrics. */
+.ascii-tilde { font-family: var(--font-mono); }

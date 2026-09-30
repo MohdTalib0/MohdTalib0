@@ -87,7 +87,7 @@
 % ---- Heading ----
 \begin{center}
     {\Huge \scshape Mohd Talib} \\ \vspace{4pt}
-    \small AI Engineering Lead \sep{} Full-Stack \\ \vspace{5pt}
+    \small Engineering Lead \sep{} AI Platforms \& Infrastructure \sep{} Applied AI Systems \\ \vspace{5pt}
     \small
     \href{mailto:mohammad.talib319@gmail.com}{\faEnvelope\ \textcolor{linkblue}{mohammad.talib319@gmail.com}} \sep{}
     \href{https://mohdtalib.netlify.app}{\faGlobe\ \textcolor{linkblue}{Portfolio}} \sep{}
@@ -98,7 +98,7 @@
 % ---- Summary ----
 \vspace{2pt}
 \small
-Engineering leader and de facto CTO with 5+ years building and leading cross-functional teams to ship production AI: multi-tenant agentic platforms, semantic search, and MLOps pipelines. As de facto CTO at Dumroo.ai, led a 20-engineer team to build Dumroo 2.0, now serving 6 K-12 districts (10+ schools), at 50\% lower inference cost, 2x accuracy, and 10x faster onboarding. At TheAgentic AI, lead delivery of 10 enterprise platforms for 10 clients in 8 months and contribute to CortexON (455 GitHub stars). Led a 60+ engineer, 15-country team at Omdena. Author of the open-source agent framework OpenFishh.
+Engineering Lead and hands-on software engineer with 5+ years building AI platforms, evaluation systems, and production automation. Technical lead for teams of up to \textbf{20 engineers}; improved NVIDIA program acceptance \textbf{from 40\% to 95\%}, automated approximately \textbf{90\% of manual technical QA}, and reduced LLM inference costs by \textbf{50\%}. Specializes in Python/TypeScript systems, multi-tenant architecture, AI evaluation, production reliability, and 0-to-1 platform delivery.
 \normalsize
 
 % ---- Experience ----
@@ -106,63 +106,68 @@ Engineering leader and de facto CTO with 5+ years building and leading cross-fun
   \resumeSubHeadingListStart
 
     \resumeSubheading
-      {TheAgentic AI}{Nov 2025 - Present}
+      {Agents Only Technologies (part of TP)}{Sep 2026 - Present}
+      {Engineering Lead \sep{} AI Platforms \& Data}{Remote}
+      \resumeItemListStart
+        \resumeItem{\textbf{Acceptance and automation.} Raised NVIDIA program acceptance \textbf{from 40\% to 95\% (+55 percentage points)} and eliminated approximately \textbf{90\% of manual technical checks} through configurable validation of formats, codecs, resolution, frame rate, audio quality, exposure and sharpness.}
+        \resumeItem{\textbf{Reusable media operations.} Unified contributor onboarding, resumable uploads, processing, QA and delivery in \textbf{MediaHub} for TTS and Egoverse programs; supported \textbf{10,000+ contributors across 2026 programs} and intercepted \textbf{195 non-compliant submissions} before delivery in September through configurable rules and SLA-based review queues.}
+        \resumeItem{\textbf{Operational reliability.} Introduced background validation jobs, preview retries, queue monitoring, Sentry observability, and recovery controls, maintaining \textbf{\textasciitilde{}99.98\% server-error-free production API execution} in September 2026.}
+        \resumeItem{\textbf{Controlled AI evaluation.} Built five-model comparison and GMR, medical, coding, and STEM assessment workflows in \textbf{AI Arena}, supporting \textbf{6,000+ candidates across 2026 assessments} with qualification scoring, access controls, progress tracking, and reporting. Established golden-dataset and structured-scoring foundations for medical reasoning evaluations.}
+        \resumeItem{\textbf{Architecture and engineering standards.} Planned the Cloudflare R2-to-AWS S3 migration with checksum reconciliation, least-privilege access and rollback controls. Established application/cloud ownership, release gates, regression testing and architecture reviews; separated production traffic from performance testing.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {TheAgentic AI}{Nov 2025 - Sep 2026}
       {Tech Lead \sep{} Senior Full Stack AI Engineer}{Applied AI Research, California \sep{} Remote}
       \resumeItemListStart
-        \resumeItem{\textit{Lead engineer owning architecture and delivery of the company's enterprise AI platforms with a small forward-deployed team: client discovery, system design, and the path to production (2 to 4 weeks each).}}
-        \resumeItem{\textbf{CortexON (open source).} Contributed core multi-agent task planning and execution APIs to TheAgentic's open-source generalized AI agent for everyday task automation. 455 GitHub stars.}
-        \resumeItem{\textbf{Core platform engine.} Built a reusable, multi-tenant agentic orchestration engine (now the OpenFishh OSS framework) that shipped 10 production enterprise platforms for 10 clients in 8 months, with strict tenant isolation.}
-        \resumeItem{\textbf{Enterprise peer-support platform.} Built a multi-tenant, privacy-first platform matching support seekers to mentors from voice stories: a safety-gated voice-intake pipeline (transcription, moderation and crisis classifier with human-in-the-loop, structured LLM extraction, multi-vector embeddings) feeding a learned-to-rank engine (pgvector ANN + LightGBM lambdarank that self-retrains from feedback at near-zero inference cost). FastAPI, Postgres/pgvector, async workers, Kubernetes. Enterprise and university pilots in 2026.}
-        \resumeItem{\textbf{Reg-tech platform.} Replaced black-box RAG with deterministic SQL + LLM orchestration, making compliance workflows auditable and grounding every response in traceable CFR/FDA data.}
-        \resumeItem{\textbf{Health-tech platform.} Built an async vision + LLM platform that generates metabolic insight reports from medical images on a scalable multi-tenant architecture.}
-        \resumeItem{\textbf{Stakeholder coordination.} Ran weekly design reviews with enterprise client stakeholders, translating security and compliance constraints (FDA, CFR) into deterministic graph-based agent workflows.}
-        \resumeItem{\textbf{Fundraising-ops platform.} Shipped new features and refactored an AI fundraising operating system used by founders across Google for Startups and NVIDIA Inception cohorts.}
+        \resumeItem{\textbf{Platform delivery.} Enabled \textbf{10 enterprise client platforms in 8 months} through a reusable multi-tenant agentic orchestration engine with tenant-isolated data, configurable workflows and shared platform primitives.}
+        \resumeItem{\textbf{Prometheus RCA / Enterprise RCA.} Unified GitHub, Grafana, Prometheus, CloudWatch, Slack, Jira, and Notion with alerts, metrics, logs, traces, deployments, topology, and runbook context for evidence-backed incident investigation and postmortem generation.}
+        \resumeItem{\textbf{Investigation controls.} Added engineer clarification, service inference, workspace isolation, encrypted credentials, OAuth, sensitive-data redaction, and configurable publishing controls. Python, FastAPI, LangGraph, OpenAI, PostgreSQL, React and TypeScript.}
+        \resumeItem{\textbf{Privacy-aware matching.} Combined voice transcription, moderation, human review and structured extraction with pgvector retrieval and LightGBM ranking to match support seekers with mentors; supported enterprise and university pilots.}
+        \resumeItem{\textbf{Auditable compliance workflows.} Combined deterministic SQL with LLM orchestration to ground regulatory responses in traceable CFR/FDA data; translated enterprise security and compliance requirements through stakeholder architecture reviews.}
+        \resumeItem{\textbf{Open-source orchestration.} Contributed multi-agent task planning and execution APIs to CortexON, TheAgentic's generalized AI agent.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Dumroo.ai}{Mar 2025 - Nov 2025}
-      {Tech Lead}{AI EdTech, New Jersey \sep{} Remote}
+      {Senior Full Stack AI Engineer \sep{} Tech Lead}{AI EdTech, New Jersey \sep{} Remote}
       \resumeItemListStart
-        \resumeItem{\textit{As de facto CTO reporting to the CEO, led a 20-engineer cross-functional team and owned hiring, developer training, sprint planning, and the architecture roadmap.}}
-        \resumeItem{\textbf{Built Dumroo 2.0 from scratch in 4 weeks:} an AI learning and assessment platform now in production across US K-12 districts. Next.js, TypeScript, Supabase, Vercel, GitHub Actions.}
-        \resumeItem{Built the core AI infrastructure: semantic vector caching and a dynamic LLM routing gateway that cut inference cost 50\% while doubling accuracy.}
-        \resumeItem{Partnered with school administrators and district heads to ship RBAC and automated onboarding pipelines, scaling adoption to 6 districts / 10+ schools in 6 months, with 10+ districts in the pipeline.}
-        \resumeItem{Built internal developer-productivity and MLOps tooling (automated regression testing and evaluation pipelines) that cut setup and customer onboarding latency 10x.}
-        \resumeItem{Integrated Stripe billing with role-based access; shipped CI/CD across Vercel and Netlify via GitHub Actions. Promoted to Senior in 6 months.}
+        \resumeItem{\textbf{Technical lead for a 20-engineer team}, reporting to the CEO; owned architecture, hiring, developer training, and roadmap execution.}
+        \resumeItem{Launched \textbf{Dumroo 2.0 in 4 weeks}, an AI learning and assessment platform; supported adoption across \textbf{6 US districts and 10+ schools in 6 months} through RBAC and automated onboarding.}
+        \resumeItem{Cut LLM inference costs \textbf{50\%} and doubled accuracy through semantic vector caching and dynamic model routing.}
+        \resumeItem{Accelerated system setup and customer onboarding \textbf{10$\times$} through automated workflows; established regression testing, evaluation pipelines and CI/CD for releases.}
       \resumeItemListEnd
 
     \resumeSubheading
       {CodeSpaze}{Apr 2024 - Feb 2025}
-      {Head of AI \& Engineering (returned to lead)}{Software, Web \& AI Development \sep{} Remote}
+      {Head of AI \& Engineering}{Software, Web \& AI Development \sep{} Remote}
       \resumeItemListStart
-        \resumeItem{\textit{Returned to CodeSpaze to lead AI \& Engineering after starting here as a Software Engineer in 2021.}}
-        \resumeItem{Grew the AI Services division 3x in MRR by standardizing reusable ML templates and full-stack services.}
-        \resumeItem{Led a 20-person cross-functional team (AI, backend, frontend, design, marketing) and set up CI/CD, automated testing, and developer onboarding to scale capacity for a pipeline of 10,000+ candidates.}
-        \resumeItem{Built and deployed full-stack AI systems and internal automation tools, and ran technical training and mentoring for interns in Python, Data Science, and Web Development.}
+        \resumeItem{Drove \textbf{3$\times$ monthly recurring revenue growth} through reusable ML templates and full-stack AI services.}
+        \resumeItem{Technical lead for a \textbf{20-engineer team}; established CI/CD, automated testing and developer onboarding, and mentored engineers across AI, backend and frontend delivery.}
+        \resumeItem{Built reusable AI/full-stack delivery frameworks and production LLM/NLP services, reducing delivery overhead and supporting services growth.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Techpile Technology}{Jul 2023 - Apr 2024}
       {Software Engineer \& Data Analyst}{Lucknow, India \sep{} On-site}
       \resumeItemListStart
-        \resumeItem{Built high-volume .NET Core APIs and tuned SQL schemas, cutting query latency 40\% and improving dashboard load times. Earned Best Performer: Software Developer (2023).}
-        \resumeItem{Led technical delivery of client web services and introduced reusable micro-frontends, winning project renewals and growing services revenue by delivering ahead of schedule.}
+        \resumeItem{Reduced SQL query latency \textbf{40\%} through .NET Core API and schema optimization, improving dashboard performance.}
+        \resumeItem{Delivered client web systems and reusable frontend components supporting project renewals and services revenue.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Omdena}{Mar 2023 - Jul 2023}
       {Machine Learning Engineer to Data Engineering Lead (Contract)}{Global AI for Social Good, New York \sep{} Remote}
       \resumeItemListStart
-        \resumeItem{Built and ran a semi-automated active-learning labeling pipeline using confidence-threshold pre-annotation, clearing a 100K+ healthcare dataset in 3 weeks and cutting the project timeline 30\%.}
-        \resumeItem{Led a 60+ ML engineer team across 15 countries to train, evaluate, and deploy YOLOv8 + PyTorch computer-vision pipelines, delivering the diagnostics system ahead of schedule.}
+        \resumeItem{Completed a \textbf{100K+ image healthcare dataset in 3 weeks} through confidence-based pre-annotation and active learning, accelerating the project timeline \textbf{30\%}.}
+        \resumeItem{Coordinated data engineering work across a \textbf{60+ member global project team in 15 countries} and delivered YOLOv8/PyTorch computer vision pipelines ahead of schedule.}
       \resumeItemListEnd
 
     \resumeSubheading
       {CodeSpaze}{Jul 2021 - Feb 2023}
       {Software Engineer}{Software, Web \& AI Development \sep{} Remote}
       \resumeItemListStart
-        \resumeItem{Shipped 8+ client applications across web, AI, and automation, owning frontend and backend on 2 to 3 week cycles.}
-        \resumeItem{Built reusable component libraries and internal tooling that cut project setup and delivery time by about 30\%, and prototyped the early AI/ML work that seeded the company's AI service line.}
+        \resumeItem{Delivered \textbf{8+ client applications} on \textbf{2 to 3 week} cycles; reduced setup and delivery time approximately \textbf{30\%} through reusable components and tooling.}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd
@@ -172,46 +177,22 @@ Engineering leader and de facto CTO with 5+ years building and leading cross-fun
   \resumeSubHeadingListStart
 
     \resumeProjectHeading
-      {\textbf{OpenFishh} $|$ \emph{Python, FastAPI, PostgreSQL, pgvector, OpenAI, Anthropic, LangChain}}{\href{https://openfishh.com}{\faGlobe\ \textcolor{linkblue}{Live}} \sep{} \href{https://github.com/MohdTalib0/OpenFishh}{\faGithub\ \textcolor{linkblue}{Code}}}
+      {\textbf{OpenFishh} $|$ \emph{Python, FastAPI, React, SQLite, Docker}}{\href{https://openfishh.com}{\faGlobe\ \textcolor{linkblue}{Live}} \sep{} \href{https://github.com/MohdTalib0/OpenFishh}{\faGithub\ \textcolor{linkblue}{Code}}}
       \resumeItemListStart
-        \resumeItem{Open-source agent infrastructure built around the three hardest problems in production agents: agent memory (persistent, provenance-tracked), agent reliability (verification, confidence scoring, safe fallbacks), and agent evaluation. The OSS counterpart to HumanizingLabs. Apache 2.0, 17 stars.}
+        \resumeItem{Open-source multi-agent research platform that gathers public sources, tracks claims and confidence, handles contradictions and generates auditable reports with evidence provenance and knowledge graphs.}
       \resumeItemListEnd
 
-    \resumeProjectHeading
-      {\textbf{HumanizingLabs} $|$ \emph{Python, Multi-Agent AI, OpenAI, Anthropic, PostgreSQL, FastAPI, Redis, RAG}}{\href{https://humanizing-labs.vercel.app}{\faGlobe\ \textcolor{linkblue}{Live}}}
-      \resumeItemListStart
-        \resumeItem{A living society of 1,200 AI agents across 31 knowledge domains that reads the internet continuously, keeps persistent belief memory with full provenance, runs structured debates on contested claims, and produces auditable intelligence reports. Every belief is typed, sourced, and confidence-decomposed.}
-      \resumeItemListEnd
-
-    \resumeProjectHeading
-      {\textbf{Wrively} $|$ \emph{Next.js, TypeScript, OpenAI, Supabase}}{\href{https://wrively.com}{\faGlobe\ \textcolor{linkblue}{Live}} \sep{} \href{https://github.com/MohdTalib0/FounderX}{\faGithub\ \textcolor{linkblue}{Code}}}
-      \resumeItemListStart
-        \resumeItem{AI writing platform that learns your voice and writes from it: topic to published post in under 3 minutes, with one-click multi-channel publish.}
-      \resumeItemListEnd
-
-    \resumeProjectHeading
-      {\textbf{BlueDrum AI} $|$ \emph{React, FastAPI, AI/ML, PostgreSQL}}{\href{https://beta.bluedrumai.com}{\faGlobe\ \textcolor{linkblue}{Live}} \sep{} \href{https://github.com/MohdTalib0/BlueDrumAI}{\faGithub\ \textcolor{linkblue}{Code}}}
-      \resumeItemListStart
-        \resumeItem{Legal evidence platform that turns chats, documents, and financial records into structured case files lawyers can use, with AI classification, entity extraction, and timeline reconstruction.}
-      \resumeItemListEnd
-
-    \resumeProjectHeading
-      {\textbf{TalPred AI} $|$ \emph{XGBoost, PostgreSQL, Redis, MLflow, React}}{\href{https://github.com/MohdTalib0/TalPred-AI}{\faGithub\ \textcolor{linkblue}{Code}}}
-      \resumeItemListStart
-        \resumeItem{Production-grade equity alpha system with automated daily cross-sectional predictions, paper trading, monitoring, and calibrated backtesting with signal-decay analysis.}
-      \resumeItemListEnd
-
-  \resumeSubHeadingListEnd
+\resumeSubHeadingListEnd
 
 % ---- Technical Skills ----
 \section{Technical Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-     \textbf{AI Systems}{: Agent Orchestration, Agent Memory, Multi-Agent Systems, AI Reliability, Tool Calling, RAG, LLM Evaluation, Provenance \& Observability, Fine-tuning, Prompt Engineering, LangChain, OpenAI / Anthropic / Gemini APIs, Vector DBs (pgvector), Vision-LLM} \\ \vspace{2pt}
-     \textbf{Full-Stack Engineering}{: TypeScript, Python, Next.js, React, FastAPI, Node.js, Express, Django, Flask, Tailwind CSS, React Native, .NET} \\ \vspace{2pt}
-     \textbf{Data \& ML}{: PostgreSQL, pgvector, Supabase, Neon, Redis, MongoDB, MySQL, Firebase, SQLAlchemy, Alembic, MLflow, PyTorch, TensorFlow, scikit-learn, XGBoost, Computer Vision (YOLOv8, CNN)} \\ \vspace{2pt}
-     \textbf{Infrastructure \& DevOps}{: Docker, AWS, Azure, Vercel, Netlify, Render, GitHub Actions, CI/CD, async architectures, REST API design, observability} \\ \vspace{2pt}
-     \textbf{Leadership \& Process}{: Technical Leadership, Agile/Scrum, Sprint Planning, Hiring \& Mentoring, Code Review, System Design, Stakeholder Management, 0-to-1 Delivery}
+     \textbf{AI Platforms \& Infrastructure}: Agent Orchestration, Multi-Agent Systems, AI Evaluation, LLM Observability, Model Routing, Tool Calling, RAG, Memory Systems, Provenance, Agent Reliability, LangGraph, pgvector \\ \vspace{2pt}
+     \textbf{Backend \& Platform Engineering}: Python, FastAPI, PostgreSQL, Redis, TypeScript, React / Next.js, REST APIs, Multi-Tenant Architecture, Background Jobs, Queues \\ \vspace{2pt}
+     \textbf{ML \& Data Systems}: PyTorch, XGBoost, LightGBM, YOLOv8, SQLAlchemy, Alembic, Media QA Pipelines \\ \vspace{2pt}
+     \textbf{Cloud \& Reliability}: AWS, S3, Docker, GitHub Actions, CI/CD, Sentry, Cloudflare R2, Observability \\ \vspace{2pt}
+     \textbf{Technical Leadership}: Architecture Reviews, Hiring, Mentoring, Roadmap Ownership, Technical Writing, Enterprise Delivery, 0-to-1 Platforms
     }}
  \end{itemize}
 
@@ -219,32 +200,19 @@ Engineering leader and de facto CTO with 5+ years building and leading cross-fun
 \section{Education}
   \resumeSubHeadingListStart
     \resumeSubheading
+      {Indian Institute of Technology Kharagpur (IIT Kharagpur)}{2026 - 2027}
+      {Technology \& AI Leadership \sep{} Partha Ghosh School of Leadership}{}
+    \resumeSubheading
       {Sagar Institute of Technology \& Management}{2019 - 2023}
       {B.Tech, Computer Science \& Engineering}{Barabanki, India}
   \resumeSubHeadingListEnd
-
-% ---- Certifications ----
-\section{Selected Coursework \& Certifications}
- \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{\item{
-     \textbf{Deep Learning Specialization} \sep{} DeepLearning.AI (Andrew Ng) \\ \vspace{2pt}
-     \textbf{Machine Learning} \sep{} Stanford University (Coursera) \\ \vspace{2pt}
-     \textbf{Generative AI with Large Language Models} \sep{} DeepLearning.AI and AWS \\ \vspace{2pt}
-     \textbf{LangChain for LLM Application Development} \sep{} DeepLearning.AI \\ \vspace{2pt}
-     \textbf{Prompt Engineering for Developers} \sep{} DeepLearning.AI \\ \vspace{2pt}
-     \textbf{MLOps Specialization} \sep{} DeepLearning.AI
-    }}
- \end{itemize}
 
 % ---- Recognition ----
 \section{Recognition \& Awards}
  \begin{itemize}[leftmargin=0.15in, itemsep=1pt]
     \small
-    \item \textbf{Fastest promotion to Senior Engineer} \sep{} Dumroo.ai, 2025 (six months from Full Stack AI Engineer to Senior)
-    \item \textbf{Apache 2.0 open-source author} \sep{} OpenFishh (17 stars, 3 forks)
-    \item \textbf{Top 10, Data Science Hackathon} \sep{} Innomatics Research Labs, 2023
-    \item \textbf{Best Performer, Software Developer} \sep{} Techpile Technology, 2023
-    \item \textbf{Letters of Recommendation} \sep{} CodeClause and The Sparks Foundation
+    \item \textbf{Top 10, Data Science Hackathon} \sep{} at Innomatics Research Labs, 2023
+    \item \textbf{Best Performer, Software Developer} \sep{} at Techpile Technology, 2023
  \end{itemize}
 
 \end{document}

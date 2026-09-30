@@ -1,7 +1,7 @@
 export const personal = {
   name: "Mohd Talib",
-  title: "AI Engineering Lead · Full-Stack",
-  tagline: "I lead teams that ship production AI. From RAG pipelines to multi-agent platforms, 0-to-1 in weeks.",
+  title: "Engineering Lead · AI Platforms & Infrastructure · Applied AI Systems",
+  tagline: "I build platforms that raise AI data quality, reduce manual work, and scale reliable operations.",
   email: "mohammad.talib319@gmail.com",
   phone: "+91 7408185999",
   linkedin: "https://linkedin.com/in/mohdtalib",
@@ -13,22 +13,43 @@ export const personal = {
 
 export const experience = [
   {
+    role: "Engineering Lead",
+    badge: "AI Platforms & Data",
+    company: "Agents Only Technologies (part of TP)",
+    type: "AI Data & Evaluation",
+    location: "India",
+    remote: true,
+    period: "Sep 2026 - Present",
+    current: true,
+    bullets: [
+      "Lead architecture, full-stack delivery, and operations for AI evaluation, media collection, annotation, and QA platforms supporting programs for NVIDIA, ByteDance, and Google.",
+      "Unified contributor onboarding, resumable uploads, processing, QA and delivery in MediaHub for TTS and Egoverse programs. Supported 10,000+ contributors across 2026 programs and intercepted 195 non-compliant submissions before delivery in September through configurable rules and SLA-based review queues.",
+      "Automated checks for codec, resolution, frame rate, duration, audio quality, exposure, sharpness, and other project rules. Reduced manual technical checks by approximately 90% and raised acceptance from 40% to 95% on NVIDIA programs.",
+      "Operational reliability: Introduced background validation jobs, preview retries, queue monitoring, Sentry observability, and recovery controls, maintaining ~99.98% server-error-free production API execution in September 2026.",
+      "Controlled AI evaluation: Built five-model comparison and GMR, medical, coding, and STEM assessment workflows in AI Arena, supporting 6,000+ candidates across 2026 assessments with qualification scoring, access controls, progress tracking, and reporting. Established golden-dataset and structured-scoring foundations for medical reasoning evaluations.",
+      "Led the planned migration from Cloudflare R2 to AWS S3 with multi-bucket separation, checksum reconciliation, rollback controls, and least-privilege access. Established release gates, regression testing, architecture reviews, and clearer ownership across application and cloud engineering.",
+    ],
+    tags: ["AI Evaluation", "Media Processing", "AWS S3", "Cloudflare R2", "Sentry", "QA Automation", "Technical Leadership"],
+  },
+  {
     role: "Senior Full Stack AI Engineer",
     badge: "Technical Lead",
     company: "TheAgentic AI",
     type: "Applied AI Research Company",
     location: "California, USA",
     remote: true,
-    period: "Nov 2025 - Present",
-    current: true,
+    period: "Nov 2025 - Sep 2026",
+    current: false,
     bullets: [
-      "Architected the core multi-tenant agentic orchestration engine (seeding the OpenFishh OSS framework) that enabled the team to deploy 10 production-grade enterprise platforms for 10 clients within 8 months, while maintaining strict tenant data isolation.",
-      "CortexON: Contributed core multi-agent task planning and execution APIs to TheAgentic's open-source generalized AI agent (455 GitHub stars).",
+      "Enabled delivery of 10 enterprise platforms for 10 clients in 8 months through a reusable multi-tenant agentic orchestration engine with tenant data isolation.",
+      "CortexON: Contributed multi-agent task planning and execution APIs to TheAgentic's open-source generalized AI agent.",
       "Enterprise peer-support platform: Architected a multi-tenant, privacy-first platform matching support seekers to mentors from voice stories. Built a safety-gated voice-intake pipeline (transcription, moderation and crisis classifier with human-in-the-loop, structured LLM extraction, multi-vector embeddings) feeding a learned-to-rank matching engine (pgvector ANN + LightGBM lambdarank, self-retraining at near-zero inference cost). Enterprise and university pilots in 2026.",
       "Solunar (Health-Tech): Designed an async vision + LLM pipeline for medical tongue-image analysis, generating automated metabolic insight reports. Multi-tenant APIs and analytics on FastAPI, PostgreSQL, and async SQLAlchemy.",
       "H2M (Reg-Tech): Replaced an unreliable black-box RAG system with deterministic SQL + LLM tool-use orchestration, making FDA and CFR compliance workflows fully auditable. Next.js + FastAPI.",
       "Orchestrated weekly design reviews with enterprise client stakeholders, translating complex security and compliance constraints (FDA, CFR) into deterministic graph-based agent workflows.",
       "Fundraising-ops platform: Shipped new features and refactored the codebase of an AI fundraising operating system used by founders across Google for Startups and NVIDIA Inception cohorts.",
+      "Prometheus RCA: Unified GitHub, Grafana, Prometheus, CloudWatch, Slack, Jira, and Notion with alerts, metrics, logs, traces, deployments, topology, and runbook context for evidence-backed incident investigation and postmortem generation.",
+      "Investigation controls: Added engineer clarification, service inference, workspace isolation, encrypted credentials, OAuth, sensitive-data redaction, and configurable publishing controls.",
     ],
     tags: ["FastAPI", "Next.js", "PostgreSQL", "pgvector", "OpenAI", "Anthropic", "LangChain", "Kubernetes", "Multi-tenant"],
   },
@@ -42,7 +63,7 @@ export const experience = [
     period: "Mar 2025 - Nov 2025",
     current: false,
     bullets: [
-      "Spearheaded technology strategy as de facto CTO (reporting to CEO), directing a 20-member cross-functional engineering team and managing hiring, developer training, sprint planning, and architectural roadmap execution.",
+      "Technical lead for a 20-engineer team, reporting to the CEO; owned architecture, hiring, developer training, and roadmap execution.",
       "Led the team to build Dumroo 2.0 from scratch in 4 weeks: an AI-driven learning and assessment platform now in production across US K-12 districts. Next.js, TypeScript, Supabase, Vercel, GitHub Actions.",
       "Designed and engineered the core AI infrastructure of Dumroo 2.0, implementing semantic vector caching and a dynamic LLM routing gateway to cut inference costs by 50% while doubling accuracy.",
       "Partnered with school administrators and district heads to ship role-based access control (RBAC) and automated onboarding pipelines, scaling adoption to 6 districts / 10+ schools in 6 months, with 10+ districts in the pipeline.",
@@ -61,8 +82,8 @@ export const experience = [
     current: false,
     bullets: [
       "Accelerated the AI Services division to drive a 3x growth in Monthly Recurring Revenue (MRR) by design-patterning reusable ML templates and full-stack services.",
-      "Spearheaded a 20-member cross-functional engineering team (AI, backend, frontend, design, marketing), establishing CI/CD pipelines, automated testing, and developer onboarding to scale capacity for a pipeline of 10,000+ candidates.",
-      "Engineered and deployed production AI systems using LLMs, Hugging Face, and custom NLP pipelines, while mentoring junior engineers in ML and full-stack development.",
+      "Technical lead for a 20-engineer team; established CI/CD, automated testing, reusable delivery frameworks and developer onboarding across AI, backend and frontend work.",
+      "Built reusable AI/full-stack delivery frameworks and production LLM/NLP services, reducing delivery overhead and supporting services growth; mentored engineers in ML and full-stack development.",
     ],
     tags: ["LLMs", "Hugging Face", "NLP", "Team Leadership"],
   },
@@ -92,7 +113,7 @@ export const experience = [
     current: false,
     bullets: [
       "Designed and executed a semi-automated active learning labeling pipeline utilizing confidence-threshold pre-annotation, completing a 100k+ healthcare dataset in 3 weeks (accelerating total project timeline by 30%).",
-      "Orchestrated a distributed team of 60+ ML engineers across 15 countries to train, evaluate, and deploy YOLOv8 + PyTorch computer vision pipelines, delivering the diagnostics system to the client ahead of schedule.",
+      "Coordinated data engineering work across a 60+ member global project team in 15 countries; delivered YOLOv8/PyTorch computer vision pipelines ahead of schedule.",
     ],
     tags: ["YOLOv8", "PyTorch", "TensorFlow", "Team Lead", "Computer Vision"],
   },
@@ -114,25 +135,44 @@ export const experience = [
 
 export const projects = [
   {
+    name: "MediaHub",
+    tagline: "Configurable media collection and QA for enterprise AI data programs.",
+    description: "Built for audio and video programs supporting NVIDIA, ByteDance, and Google. Combines contributor onboarding, large-file workflows, automated technical and quality checks, reviewer queues, delivery tracking, and analytics. Automation raised acceptance from 40% to 95% on NVIDIA programs and removed approximately 90% of manual checks.",
+    tech: ["Media Processing", "QA Automation", "AWS S3", "Cloudflare R2", "Sentry"],
+    featured: true,
+  },
+  {
+    name: "AI Arena",
+    tagline: "Controlled model comparison and AI assessment workflows.",
+    description: "AI evaluation platform supporting 6,000+ candidates across model comparison, ByteDance GMR, medical, coding, and STEM assessments in 2026. Combines controlled access, qualification scoring, progress tracking, reporting, and golden-dataset evaluation foundations.",
+    tech: ["AI Evaluation", "Model Comparison", "Scoring", "Analytics"],
+    featured: true,
+  },
+  {
+    name: "Prometheus RCA",
+    tagline: "Evidence-backed incident investigation across topology, telemetry and code.",
+    description: "TheAgentic AI's incident investigation platform connects monitoring, code and operational knowledge. It groups cascading alerts, compares likely causes using service dependencies and telemetry, asks engineers targeted questions, and drafts postmortems with controlled publishing to Slack, Jira and Notion.",
+    tech: ["Python", "FastAPI", "LangGraph", "React", "TypeScript", "Service Topology"],
+    featured: true,
+  },
+  {
     name: "OpenFishh",
-    tagline: "Open-source agent infrastructure for production AI.",
+    tagline: "Open-source collective intelligence with traceable evidence.",
     description:
-      "Open-source agent infrastructure platform built around the three hardest problems in production agents: agent memory (persistent, provenance-tracked), agent reliability (verification, confidence scoring, and safe fallbacks), and agent evaluation (knowing when an agent is actually good). The OSS counterpart to HumanizingLabs, Apache 2.0. READMEs in 7 languages (EN/ZH/JA/KO/ES/HI/AR), Docker-ready.",
+      "Multi-agent research platform that gathers public sources, tracks claims and confidence, handles contradictions and generates auditable reports. Connects evidence provenance with knowledge graphs and a React interface. Apache 2.0, with Docker setup and multilingual documentation.",
     tech: [
       "Python",
       "FastAPI",
-      "PostgreSQL",
-      "pgvector",
+      "React",
+      "SQLite",
       "Multi-Agent Orchestration",
-      "Agent Memory",
-      "RAG",
+      "Evidence Provenance",
+      "Confidence Scoring",
       "Docker",
       "Apache 2.0",
     ],
     live: "https://openfishh.com",
     github: "https://github.com/MohdTalib0/OpenFishh",
-    stars: 17,
-    forks: 3,
     openSource: true,
     featured: true,
   },
@@ -151,15 +191,15 @@ export const projects = [
     github: "https://github.com/TheAgenticAI/CortexON",
     stars: 455,
     openSource: true,
-    featured: true,
+    featured: false,
   },
   {
     name: "HumanizingLabs",
-    tagline: "1,200 AI beings. 30,000+ beliefs. Zero epistemic shortcuts.",
-    description: "A living digital society of 1,200 AI agents across 31 knowledge domains that reads the internet continuously, maintains persistent belief memory with full provenance chains, runs structured debates on contested claims, and produces auditable intelligence reports on demand. Every belief is typed, sourced, confidence-decomposed, and lifecycle-governed: the system tracks why it believes things, how confident it should be, and what would change its mind.",
+    tagline: "Persistent research with sourced memory and auditable reports.",
+    description: "Multi-agent research system across 31 knowledge domains with persistent sourced memory, structured debate and auditable intelligence reports. Tracks claims, evidence provenance and confidence as information changes.",
     tech: ["Python", "Multi-Agent AI", "OpenAI", "Anthropic", "PostgreSQL", "FastAPI", "Redis", "RAG", "LLM Orchestration"],
     live: "https://humanizing-labs.vercel.app/",
-    featured: true,
+    featured: false,
   },
   {
     name: "Wrively",
@@ -168,7 +208,7 @@ export const projects = [
     tech: ["Next.js", "OpenAI API", "Supabase", "TypeScript", "Tailwind CSS"],
     live: "https://wrively.com",
     github: "https://github.com/MohdTalib0/FounderX",
-    featured: true,
+    featured: false,
   },
   {
     name: "BlueDrum AI",
@@ -191,9 +231,9 @@ export const projects = [
   {
     name: "Dumroo 2.0",
     tagline: "AI-powered EdTech platform.",
-    description: "Built from scratch in 4 weeks. AI-driven learning, assessment, and code-generation platform for US K-12 schools. RAG + Agentic AI workflows.",
+    description: "Technical lead for a 20-engineer team delivering an AI learning and assessment platform in four weeks. Semantic caching and model routing reduced inference costs 50%; automated onboarding supported adoption across six US districts and more than ten schools within six months.",
     tech: ["Next.js", "TypeScript", "Supabase", "RAG", "Agentic AI"],
-    featured: false,
+    featured: true,
   },
   {
     name: "Solunar Wellness",
@@ -260,13 +300,13 @@ export const projects = [
  */
 export const currentStack = [
   "FastAPI",
-  "Next.js",
+  "React",
   "TypeScript",
   "PostgreSQL",
-  "pgvector",
+  "AWS S3",
   "OpenAI",
   "Anthropic",
-  "LangChain",
+  "AI Evaluation",
   "AWS",
   "Docker",
 ];
@@ -276,52 +316,11 @@ export const currentStack = [
  * top 10 are signal, the rest dilute.
  */
 export const skills = {
-  "AI & LLM": [
-    "RAG",
-    "Agentic AI",
-    "LLM Optimization",
-    "Prompt Engineering",
-    "LangChain",
-    "OpenAI / Anthropic APIs",
-  ],
-  "Backend": [
-    "FastAPI",
-    "Node.js",
-    "Django",
-    "SQLAlchemy",
-    "REST & Event APIs",
-    "Async Architectures",
-  ],
-  "Frontend & Mobile": [
-    "Next.js",
-    "React",
-    "React Native",
-    "TypeScript",
-    "Tailwind CSS",
-  ],
-  "ML & Data": [
-    "PyTorch",
-    "TensorFlow",
-    "XGBoost",
-    "Computer Vision",
-    "MLflow",
-    "ETL Pipelines",
-  ],
-  "Infrastructure": [
-    "Docker",
-    "Kubernetes",
-    "AWS",
-    "Azure",
-    "GitHub Actions",
-    "CI/CD",
-  ],
-  "Databases & BaaS": [
-    "PostgreSQL",
-    "pgvector",
-    "Supabase",
-    "Redis",
-    "MySQL",
-  ],
+  "AI Platforms & Infrastructure": ["Agent Orchestration", "Multi-Agent Systems", "AI Evaluation", "LLM Observability", "Model Routing", "Tool Calling", "RAG", "Memory Systems", "Provenance", "Agent Reliability", "LangGraph", "pgvector"],
+  "Backend & Platform Engineering": ["Python", "FastAPI", "PostgreSQL", "Redis", "TypeScript", "React / Next.js", "REST APIs", "Multi-Tenant Architecture", "Background Jobs", "Queues"],
+  "ML & Data Systems": ["PyTorch", "XGBoost", "LightGBM", "YOLOv8", "SQLAlchemy", "Alembic", "Media QA Pipelines"],
+  "Cloud & Reliability": ["AWS", "S3", "Docker", "GitHub Actions", "CI/CD", "Sentry", "Cloudflare R2", "Observability"],
+  "Technical Leadership": ["Architecture Reviews", "Hiring", "Mentoring", "Roadmap Ownership", "Technical Writing", "Enterprise Delivery", "0-to-1 Platforms"],
 };
 
 /**
@@ -333,6 +332,15 @@ export const education = {
   degree: "B.Tech in Computer Science & Engineering",
   school: "Sagar Institute of Technology & Management, Barabanki",
   year: "2023",
+};
+
+export const executiveEducation = {
+  program: "Technology & AI Leadership",
+  school: "Indian Institute of Technology Kharagpur (IIT Kharagpur)",
+  department: "Partha Ghosh School of Leadership",
+  period: "2026 - 2027",
+  status: "In progress",
+  focus: ["AI Strategy", "Technology Leadership", "Responsible AI", "Governance & Risk", "Digital Transformation"],
 };
 
 /**
@@ -349,7 +357,7 @@ export const awards = [
 export const stats = [
   { value: "5+", label: "Years Experience" },
   { value: "30+", label: "Products Shipped" },
-  { value: "60+", label: "Engineers Led" },
+  { value: "20", label: "Engineers in Teams Led" },
   { value: "15+", label: "Countries Collaborated" },
 ];
 
@@ -360,24 +368,24 @@ export const stats = [
  */
 export const proofMetrics = [
   {
-    value: "10+",
-    label: "Production AI platforms",
-    detail: "Led delivery 0-to-1 at TheAgentic AI and Dumroo.ai",
+    value: "95%",
+    label: "Media acceptance",
+    detail: "Up from 40% on NVIDIA programs",
   },
   {
-    value: "4 wk",
-    label: "Dumroo 2.0",
-    detail: "Led a 20-engineer team. Now serving 6 US K-12 districts",
+    value: "~90%",
+    label: "Less manual checking",
+    detail: "Through configurable MediaHub validation",
   },
   {
-    value: "~50%",
-    label: "Inference cost cut",
-    detail: "On Dumroo's RAG pipeline. Accuracy still up 2x",
+    value: "50%",
+    label: "Lower inference costs",
+    detail: "Through semantic caching and model routing at Dumroo",
   },
   {
-    value: "10×",
-    label: "Onboarding speed",
-    detail: "Automated school setup at Dumroo.ai",
+    value: "20",
+    label: "Engineering team size",
+    detail: "Technical leadership, architecture and roadmap ownership",
   },
 ];
 
@@ -386,6 +394,7 @@ export const proofMetrics = [
  * sees a sequence of credible places before scrolling.
  */
 export const collaborations = [
+  "Agents Only Technologies",
   "TheAgentic AI",
   "Dumroo.ai",
   "Omdena",

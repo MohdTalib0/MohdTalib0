@@ -10,18 +10,19 @@
  * Outputs:
  *   public/Mohd_Talib_Resume.pdf   (one-pager)
  *   public/Mohd_Talib_CV.pdf       (detailed CV)
- *   public/resume.pdf              (alias for the detailed CV so the
+ *   public/resume.pdf              (alias for the one-page resume so the
  *                                   portfolio's /resume.pdf links open it)
  */
 
 import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
+import { basename, dirname, resolve } from "node:path";
 import { copyFile, mkdir } from "node:fs/promises";
 import puppeteer from "puppeteer";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..");
 const publicDir = resolve(repoRoot, "public");
+const legacyDir = resolve(publicDir, "LaTex Resume's");
 
 /** @type {{src: string, out: string, label: string, maxPages: number}[]} */
 const docs = [
@@ -35,7 +36,7 @@ const docs = [
     src: resolve(__dirname, "cv-detailed.html"),
     out: resolve(publicDir, "Mohd_Talib_CV.pdf"),
     label: "Detailed CV",
-    maxPages: 3,
+    maxPages: 2,
   },
 ];
 
@@ -84,6 +85,7 @@ async function renderPdf(browser, doc) {
 
 async function main() {
   await mkdir(publicDir, { recursive: true });
+  await mkdir(legacyDir, { recursive: true });
 
   console.log("Launching headless Chromium…");
   const browser = await puppeteer.launch({
@@ -96,13 +98,15 @@ async function main() {
       await renderPdf(browser, doc);
     }
 
-    // /resume.pdf aliases the detailed CV so the portfolio's existing
-    // <a href="/resume.pdf"> links open the 3-page CV without edits.
+    // /resume.pdf aliases the one-page resume linked from the portfolio.
     await copyFile(
-      resolve(publicDir, "Mohd_Talib_CV.pdf"),
+      resolve(publicDir, "Mohd_Talib_Resume.pdf"),
       resolve(publicDir, "resume.pdf")
     );
-    console.log("✓  Alias copied → public/resume.pdf (detailed CV)");
+    for (const doc of docs) {
+      await copyFile(doc.out, resolve(legacyDir, basename(doc.out)));
+    }
+    console.log("✓  Alias copied → public/resume.pdf (one-page resume)");
   } finally {
     await browser.close();
   }
