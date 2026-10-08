@@ -42,7 +42,7 @@ const highlights = [
     metricLabel: "lower inference costs",
     secondary: "6 US districts · 10+ schools in 6 months",
     summary:
-      "An AI learning and assessment platform launched in four weeks. Semantic caching and model routing improved inference economics; repeatable onboarding supported district adoption.",
+      "An AI learning and assessment platform launched in four weeks. RAG, hybrid processing and caching reduced model costs; an internal platform automated approximately 90% of manual setup and onboarding work.",
     flow: ["Onboard", "Retrieve", "Route", "Evaluate"],
   },
 ];
@@ -107,7 +107,7 @@ export function Hero() {
             <div className="brief-footer">
               <span className="eyebrow">Current role</span>
               <p>
-                Engineering Lead
+                Engineering Lead · Contract
                 <br />
                 <strong>Agents Only Technologies</strong>
                 <span>Part of TP</span>

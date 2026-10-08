@@ -95,6 +95,17 @@ metric definitions and the scope of the work. Do not add technologies solely
 because a JD mentions them. Save tailored files separately so the public PDF
 remains the general version.
 
+## Engagement descriptions
+
+Keep engagement wording consistent across HTML, LaTeX, website and prepared
+LinkedIn copy. Agents Only Technologies (Jul 2026 - Present) and TheAgentic AI
+(Nov 2025 - Sep 2026) are labelled **Contract**, reflecting the confirmed
+independent-contractor arrangements. Their dates overlap because the AOT
+engagement began initially part-time while the TheAgentic engagement continued.
+Omdena is labelled
+**Project-based engagement**. Techpile uses **Client Software Delivery** as a
+work-scope descriptor; it does not imply fixed-term or contract employment.
+
 ## Evidence definitions and next additions
 
 - User-confirmed 2026 aggregate totals: 10,000+ contributors across MediaHub
@@ -116,8 +127,20 @@ remains the general version.
   should not be used to reconstruct the separate program acceptance rate.
 - API reliability: approximately 0.02% server errors across more than 137,000
   September 2026 requests. This is an error-rate measure, not an uptime SLA.
-- Dumroo inference: 50% lower cost and doubled accuracy. Keep the evaluated task,
-  model configuration, baseline and accuracy measure available for discussion.
+- Dumroo inference: 50% lower cost through RAG, hybrid application logic and
+  caching. Response quality improved through adversarial testing, failure-case
+  analysis, prompt refinement and model-parameter tuning. The earlier doubled-
+  accuracy claim is omitted until its task, baseline and evaluation are clear.
+- Dumroo onboarding: approximately 90% of manual setup and onboarding work
+  automated through an internal platform. This is manual effort, not a measured
+  10x increase in onboarding throughput or a 10x reduction in elapsed time.
+- AOT ownership: user reports building MediaHub and AI Arena and leading
+  architecture/full-stack delivery. Aggregate 2026 platform totals are not net
+  user growth attributed to the July start date. Do not invent inherited-system
+  boundaries or before/after growth figures.
+- IIT Kharagpur: executive programme, in progress (2026-2027); programme type
+  checked against https://online.iitkgp.ac.in/executive-program-technology-and-ai-leadership.
+  The course page establishes programme details, not personal enrolment.
 - Leadership: teams of 20 engineers at Dumroo and CodeSpaze. Keep team composition,
   reporting relationships and decisions clear; do not sum teams into a claim of
   unique direct reports.

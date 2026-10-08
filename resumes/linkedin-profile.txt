@@ -7,17 +7,35 @@ Engineering Lead | AI Platforms & Infrastructure | Applied AI Systems | Python, 
 ABOUT
 I build AI products and enterprise platforms that improve quality, reduce operating costs and make delivery repeatable. My work combines hands-on Python and TypeScript engineering with architecture, production operations and technical team leadership.
 
-At Agents Only Technologies, part of TP, I lead AI evaluation and media operations platforms supporting programs for NVIDIA, ByteDance and Google. Configurable validation raised NVIDIA program media acceptance from 40% to 95% and reduced manual technical checks approximately 90%. MediaHub supports 10,000+ contributors across projects in 2026, connecting collection, background processing, QA and delivery. AI Arena supports 6,000+ candidates across model comparison, GMR, medical, coding and STEM assessments in 2026, with controlled access and structured scoring.
+As Engineering Lead on a contract engagement at Agents Only Technologies, part of TP, I lead AI evaluation and media operations platforms supporting programs for NVIDIA, ByteDance and Google. Configurable validation raised NVIDIA program media acceptance from 40% to 95% and reduced manual technical checks approximately 90%. MediaHub supports 10,000+ contributors across projects in 2026, connecting collection, background processing, QA and delivery. AI Arena supports 6,000+ candidates across model comparison, GMR, medical, coding and STEM assessments in 2026, with controlled access and structured scoring.
 
-Previously at TheAgentic AI, I worked on reusable multi-tenant AI systems and Prometheus RCA: an incident investigation platform connecting alerts, service topology, telemetry, code and operational knowledge. Its workflows group cascading failures, compare likely causes, collaborate with engineers and draft evidence-backed postmortems.
+Previously on a contract engagement at TheAgentic AI, I worked on reusable multi-tenant AI systems and Prometheus RCA: an incident investigation platform connecting alerts, service topology, telemetry, code and operational knowledge. Its workflows group cascading failures, compare likely causes, collaborate with engineers and draft evidence-backed postmortems.
 
-At Dumroo, as technical lead for a 20-engineer team, I launched Dumroo 2.0 in four weeks. Semantic caching and model routing cut inference costs 50%; automated onboarding supported adoption across six US districts and more than ten schools within six months.
+At Dumroo, as technical lead for a 20-engineer team, I launched Dumroo 2.0 in four weeks. RAG, hybrid processing and caching cut inference costs 50%. An internal platform automated approximately 90% of manual setup and onboarding work, supporting adoption across six US districts and more than ten schools within six months. Improved response accuracy through adversarial testing, failure-case analysis, prompt refinement and model-parameter tuning.
 
 I focus on practical engineering decisions: evaluation quality, model economics, tenant isolation, access controls, background jobs, observability and recovery paths. I also develop OpenFishh, an open-source multi-agent research platform with evidence provenance, confidence scoring and auditable reports.
 
 Currently pursuing Technology & AI Leadership at IIT Kharagpur's Partha Ghosh School of Leadership (2026-2027, executive programme, in progress).
 
 Interested in Senior, Lead and Staff opportunities in AI product engineering, AI platforms and production automation with international teams hiring from India.
+
+EXPERIENCE WORDING
+Engineering Lead · AI Platforms & Data
+Agents Only Technologies (part of TP) · Contract · Remote
+Jul 2026 - Present
+
+Tech Lead · Senior Full Stack AI Engineer
+TheAgentic AI · Contract · Remote
+Nov 2025 - Sep 2026
+
+Software Engineer & Data Analyst
+Techpile Technology · Client Software Delivery · On-site
+Jul 2023 - Apr 2024
+Scope: Client web applications, .NET Core API performance and reusable frontend components.
+
+Machine Learning Engineer · Data Engineering Lead
+Omdena · Project-based engagement · Remote
+Mar 2023 - Jul 2023
 
 FEATURED ITEMS
 1. Portfolio and case studies: https://mohdtalib.netlify.app/#projects

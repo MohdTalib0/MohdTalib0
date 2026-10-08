@@ -25,7 +25,7 @@ NVIDIA program acceptance: 40% to 95%. Manual technical checks: approximately 90
 
 ### About Me
 
-Engineering Lead at **Agents Only Technologies** (part of TP.ai Data Services). I lead platform delivery for AI evaluation, media collection, annotation, QA, and operations supporting programs for NVIDIA, ByteDance, and Google. Previously a Technical Lead at **TheAgentic AI** and **Dumroo.ai**, Head of AI at **CodeSpaze**, and ML Engineer at **Omdena**.
+Engineering Lead at **Agents Only Technologies** (part of TP.ai Data Services), on a contract engagement. I lead platform delivery for AI evaluation, media collection, annotation, QA, and operations supporting programs for NVIDIA, ByteDance, and Google. Previously a Technical Lead on a contract engagement at **TheAgentic AI**, Technical Lead at **Dumroo.ai**, Head of AI at **CodeSpaze**, and ML Engineer / Data Engineering Lead on a project-based engagement at **Omdena**.
 
 I turn program requirements into reusable systems with measurable improvements in acceptance, review effort, and reliability.
 
@@ -55,7 +55,7 @@ I turn program requirements into reusable systems with measurable improvements i
 
 ### What I'm Shipping Now
 
-- **Engineering Lead at [Agents Only Technologies](https://www.agentsonly.com/)** — building MediaHub (10,000+ contributors across projects in 2026) and AI Arena for enterprise AI data and evaluation programs
+- **Engineering Lead at [Agents Only Technologies](https://www.agentsonly.com/)** (Contract) — building MediaHub (10,000+ contributors across projects in 2026) and AI Arena for enterprise AI data and evaluation programs
 - **MediaHub** — configurable media validation and QA raised acceptance from 40% to 95% on NVIDIA programs and removed approximately 90% of manual checks
 - **AI Arena** — 6,000+ candidates across model comparison, GMR, medical, coding and STEM assessments in 2026, with controlled access and structured scoring
 - **[HumanizingLabs](https://humanizing-labs.vercel.app/)** — a multi-agent research system across 31 knowledge domains, with sourced memory, structured debate and auditable reports
@@ -69,7 +69,7 @@ I turn program requirements into reusable systems with measurable improvements i
 | --- | --- | --- |
 | **MediaHub** | NVIDIA program acceptance rose from 40% to 95%; manual technical checks fell approximately 90% | Configurable validation, background processing, project-scoped access, reviewer queues, retries and recovery |
 | **Prometheus RCA** | Connected fragmented incident evidence into investigation and postmortem workflows | Alert correlation, service topology, hypothesis comparison, engineer clarification, workspace isolation and controlled publishing |
-| **Dumroo 2.0** | 50% lower inference costs; delivery in four weeks; adoption across six US districts and 10+ schools in six months | Semantic caching, model routing, automated onboarding, evaluation pipelines and leadership of 20 engineers |
+| **Dumroo 2.0** | 50% lower inference costs; delivery in four weeks; adoption across six US districts and 10+ schools in six months | RAG, hybrid processing, caching, an internal platform automating ~90% of manual setup and onboarding work, and leadership of 20 engineers |
 
 The portfolio presents the problem, implementation, engineering decisions and results for these projects.
 

@@ -16,10 +16,10 @@ export const experience = [
     role: "Engineering Lead",
     badge: "AI Platforms & Data",
     company: "Agents Only Technologies (part of TP)",
-    type: "AI Data & Evaluation",
+    type: "Contract · AI Data & Evaluation",
     location: "India",
     remote: true,
-    period: "Sep 2026 - Present",
+    period: "Jul 2026 - Present",
     current: true,
     bullets: [
       "Lead architecture, full-stack delivery, and operations for AI evaluation, media collection, annotation, and QA platforms supporting programs for NVIDIA, ByteDance, and Google.",
@@ -35,7 +35,7 @@ export const experience = [
     role: "Senior Full Stack AI Engineer",
     badge: "Technical Lead",
     company: "TheAgentic AI",
-    type: "Applied AI Research Company",
+    type: "Contract · Applied AI Research",
     location: "California, USA",
     remote: true,
     period: "Nov 2025 - Sep 2026",
@@ -65,9 +65,10 @@ export const experience = [
     bullets: [
       "Technical lead for a 20-engineer team, reporting to the CEO; owned architecture, hiring, developer training, and roadmap execution.",
       "Led the team to build Dumroo 2.0 from scratch in 4 weeks: an AI-driven learning and assessment platform now in production across US K-12 districts. Next.js, TypeScript, Supabase, Vercel, GitHub Actions.",
-      "Designed and engineered the core AI infrastructure of Dumroo 2.0, implementing semantic vector caching and a dynamic LLM routing gateway to cut inference costs by 50% while doubling accuracy.",
+      "Designed hybrid AI infrastructure combining RAG, conventional application logic and caching to reduce unnecessary model calls and cut LLM inference costs by 50%.",
       "Partnered with school administrators and district heads to ship role-based access control (RBAC) and automated onboarding pipelines, scaling adoption to 6 districts / 10+ schools in 6 months, with 10+ districts in the pipeline.",
-      "Architected internal developer productivity and MLOps tooling (automated regression testing and evaluation pipelines), reducing system setup and customer onboarding latency by 10x.",
+      "Built an internal platform that automated approximately 90% of manual setup and onboarding work; established regression testing, evaluation pipelines and CI/CD.",
+      "Improved response accuracy through RAG, adversarial testing, failure-case analysis, prompt refinement and model-parameter tuning.",
       "Promoted to Senior within 6 months of joining.",
     ],
     tags: ["Next.js", "TypeScript", "Supabase", "RAG", "Agentic AI", "Vercel"],
@@ -90,7 +91,7 @@ export const experience = [
   {
     role: "Software Engineer & Data Analyst",
     company: "Techpile Technology",
-    type: "Software Development",
+    type: "Client Software Delivery",
     location: "Lucknow, India",
     remote: false,
     period: "Jul 2023 - Apr 2024",
@@ -106,7 +107,7 @@ export const experience = [
     role: "Machine Learning Engineer",
     badge: "Data Engineering Lead",
     company: "Omdena",
-    type: "Global AI for Social Good",
+    type: "Project-based engagement",
     location: "New York, USA",
     remote: true,
     period: "Mar 2023 - Jul 2023",
@@ -231,7 +232,7 @@ export const projects = [
   {
     name: "Dumroo 2.0",
     tagline: "AI-powered EdTech platform.",
-    description: "Technical lead for a 20-engineer team delivering an AI learning and assessment platform in four weeks. Semantic caching and model routing reduced inference costs 50%; automated onboarding supported adoption across six US districts and more than ten schools within six months.",
+    description: "Technical lead for a 20-engineer team delivering an AI learning and assessment platform in four weeks. RAG, hybrid processing and caching reduced inference costs 50%; an internal platform automated approximately 90% of manual setup and onboarding work, supporting adoption across six US districts and more than ten schools within six months.",
     tech: ["Next.js", "TypeScript", "Supabase", "RAG", "Agentic AI"],
     featured: true,
   },
@@ -335,7 +336,7 @@ export const education = {
 };
 
 export const executiveEducation = {
-  program: "Technology & AI Leadership",
+  program: "Executive Programme in Technology & AI Leadership",
   school: "Indian Institute of Technology Kharagpur (IIT Kharagpur)",
   department: "Partha Ghosh School of Leadership",
   period: "2026 - 2027",
@@ -380,7 +381,7 @@ export const proofMetrics = [
   {
     value: "50%",
     label: "Lower inference costs",
-    detail: "Through semantic caching and model routing at Dumroo",
+    detail: "Through RAG, hybrid processing and caching at Dumroo",
   },
   {
     value: "20",
